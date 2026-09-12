@@ -1,0 +1,4 @@
+pandas>=2.2
+scikit-learn>=1.5
+numpy>=2.0
+pytest>=8.0

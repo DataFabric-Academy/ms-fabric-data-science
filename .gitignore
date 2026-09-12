@@ -1,0 +1,23 @@
+# Local source / working files (not published with the repo)
+Source/
+
+# Python
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+
+# Local pipeline artifacts
+labs/data/.local/
+
+# Editor / local tooling (keep out of the published repo)
+.cursor/
+.vscode/
+.idea/
+*.code-workspace
+
+# APM / agent skill caches (local only)
+.agents/
+apm_modules/
+apm.yml
+apm.lock.yaml
