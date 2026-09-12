@@ -29,13 +29,13 @@
 2. ตั้งชื่อ **`labs`** (หรือ `labs-<ชื่อย่อ>` ถ้าชื่อซ้ำใน tenant)
 3. ที่ **Advanced** เลือกประเภท workspace เป็น **Fabric Trial**
 4. กด **Apply**
-5. มุมล่างซ้ายสลับประสบการณ์เป็น **Data Science** ถ้ายังไม่ใช่
+5. ที่มุมล่างซ้าย ให้สลับโหมดการทำงาน (Experience Switcher) เป็น **Data Science** (หากยังไม่ได้เลือก)
 
 **สิ่งที่ควรเห็น:** เปิดเข้า workspace ที่ว่าง และเป็นเจ้าของคนเดียว — ไม่ต้องรอคำเชิญจากผู้สอน
 
 อ้างอิง: [Create a workspace](https://learn.microsoft.com/fabric/fundamentals/create-workspaces)
 
-## สร้าง Lakehouse และอัปโหลดไฟล์ดิบ
+## สร้าง Lakehouse และอัปโหลดไฟล์ข้อมูลต้นทาง
 
 1. ใน workspace กด **+ New item** แล้วเลือก **Lakehouse**
 2. ตั้งชื่อ **`lh_freshmart`**
@@ -45,7 +45,7 @@
 > **ทำไมชื่อ schema สำคัญ:** ในแล็บนี้ชั้น Medallion คือ**ชื่อ schema** ของ lakehouse เดียวกัน  
 > ตารางจึงเรียกว่า `bronze.transactions` ไม่ใช่ `bronze_transactions`  
 > `bronze` / `silver` / `gold` บอกสัญญาคุณภาพ ไม่ใช่แค่จัดกลุ่มใน Explorer — Lab 0 เขียน Bronze, Lab 2 เขียน Silver, Lab 4 เขียน Gold  
-> `Files/raw/` เป็นโซนลงจอดไฟล์ CSV ยังไม่ใช่ตารางชั้น Bronze จนกว่า notebook จะเขียนเป็น Delta ใน schema `bronze`  
+> `Files/raw/` เป็นพื้นที่พักไฟล์นำเข้า (Landing Zone) ยังไม่ใช่ตารางชั้น Bronze จนกว่า notebook จะเขียนเป็น Delta ใน schema `bronze`  
 > เลือกเปิด schemas ได้ครั้งเดียวตอนสร้าง lakehouse  
 > อธิบายเพิ่ม: [Medallion ใน M01](../../docs/01-fabric-architecture.md#ทำไมชื่อ-schema-สำคัญต่อ-medallion) · [glossary](../../docs/glossary.md#medallion-bronze--silver--gold)
 5. เปิด **Files** แล้วสร้างโฟลเดอร์ `raw`

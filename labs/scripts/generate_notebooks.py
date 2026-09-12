@@ -165,7 +165,7 @@ def build() -> None:
 4. รอ Spark ขึ้น Ready (รอบแรก 1–2 นาทีได้ — **อย่ารันหลายเซลล์ซ้อน**)
 
 ### ศัพท์ที่ใช้ในแล็บนี้
-Lakehouse คือที่เก็บไฟล์และตารางใน OneLake ชั้น Bronze คือข้อมูลดิบที่คุณสร้างจาก CSV ในแล็บนี้ เช่นตาราง `bronze.transactions`  
+Lakehouse คือที่เก็บไฟล์และตารางใน OneLake โดยชั้น Bronze คือตารางข้อมูลต้นทางที่คุณสร้างจากไฟล์ CSV ในแล็บนี้ เช่นตาราง `bronze.transactions`  
 อธิบายเพิ่ม: ดูอภิธานศัพท์ใน repository ที่ `docs/glossary.md`
 
 ### ถ้าติด — อ่านก่อนถาม TA
@@ -187,7 +187,7 @@ Lakehouse คือที่เก็บไฟล์และตารางใ�
             ),
             code_cell(LOADER),
             md_cell(
-                """### สร้างตาราง Bronze จากไฟล์ดิบ
+                """### สร้างตาราง Bronze จากไฟล์ข้อมูลต้นทาง (CSV)
 
 **โค้ดนี้ทำอะไร:** สร้าง schema `bronze` / `silver` / `gold` แล้วเขียนตาราง `bronze.transactions` และ `bronze.customers` จาก `Files/raw/`
 

@@ -6,11 +6,11 @@
 | --- | --- |
 | Microsoft Learn Learning Path | [Implement data science & machine learning for AI in Fabric](https://learn.microsoft.com/training/paths/implement-data-science-machine-learning-fabric/) |
 | สไลด์ไทย / ENU | `Source/` — รายชื่อไฟล์ใน [resources.md](resources.md) |
-| แล็บมือบน | [labs/README.md](../labs/README.md) |
+| แล็บปฏิบัติจริง (Hands-on Labs) | [labs/README.md](../labs/README.md) |
 | อภิธานศัพท์ | [glossary.md](glossary.md) |
 | มาตรฐานภาษาไทย | [writing-style-th.md](writing-style-th.md) |
 
-กรณีศึกษาหลัก: **FreshMart** — พยากรณ์ความต้องการสินค้า และทำนายลูกค้าที่จะเลิกซื้อ บน Lakehouse ที่จัดชั้นข้อมูลเป็น Bronze (ดิบ) แล้ว Silver (พร้อมวิเคราะห์) และ Gold (พร้อมใช้ธุรกิจ)
+กรณีศึกษาหลัก: **FreshMart** — พยากรณ์ความต้องการสินค้า และทำนายลูกค้าที่จะเลิกซื้อ บน Lakehouse ที่จัดชั้นข้อมูลเป็น Bronze (ข้อมูลต้นฉบับ/Ingestion) แล้ว Silver (ข้อมูลพร้อมวิเคราะห์/Cleaned Features) และ Gold (ข้อมูลพร้อมใช้ทางธุรกิจ/Predictions & Aggregations)
 
 ## เส้นทางอ่านเอกสาร
 

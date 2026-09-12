@@ -20,7 +20,7 @@
 
 ## Lakehouse
 
-ที่เก็บข้อมูลใน Microsoft Fabric ที่รวมไฟล์ดิบกับตารางวิเคราะห์ไว้ที่เดียว (มักใช้รูปแบบ Delta Lake)
+พื้นที่จัดเก็บข้อมูลใน Microsoft Fabric ที่รวมไฟล์ข้อมูลต้นทาง (Files) และตารางวิเคราะห์ (Tables) ไว้ในที่เดียว (ใช้รูปแบบ Delta Lake)
 
 ## OneLake
 
@@ -30,7 +30,7 @@
 
 ชั้นคุณภาพข้อมูลสามชั้น — แต่ละชั้นเป็น**สัญญา**ว่าข้อมูลนั้นเชื่อถือได้แค่ไหน:
 
-1. **Bronze** — ข้อมูลดิบใกล้แหล่ง เช่น `bronze.customers`
+1. **Bronze** — ข้อมูลต้นฉบับจากแหล่งกำเนิด (Raw Ingestion) เช่น `bronze.customers`
 2. **Silver** — สะอาดและมีฟีเจอร์พร้อมวิเคราะห์ เช่น `silver.customer_features`
 3. **Gold** — พร้อมใช้ธุรกิจ/รายงาน เช่น `gold.freshmart_predictions`
 

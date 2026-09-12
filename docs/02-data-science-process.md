@@ -59,7 +59,7 @@ flowchart TD
 | ขั้นตอนในวงจร | อ็อบเจกต์ / เครื่องมือบน Fabric | ประโยชน์ที่ได้รับ |
 | --- | --- | --- |
 | **1. ปัญหาธุรกิจ** | Power BI Dashboard, Semantic Model | เห็นช่องว่างของยอดขายและตัวชี้วัดธุรกิจที่ต้องการปรับปรุง |
-| **2. จัดเก็บข้อมูล** | Lakehouse (`lh_freshmart`), OneLake Shortcuts | เก็บทั้งไฟล์ดิบและตาราง Delta ไว้ที่ศูนย์กลางเดียว |
+| **2. จัดเก็บข้อมูล** | Lakehouse (`lh_freshmart`), OneLake Shortcuts | เก็บทั้งไฟล์ข้อมูลต้นทางและตาราง Delta ไว้ที่ศูนย์กลางเดียว |
 | **3. สำรวจ / เตรียมข้อมูล** | Fabric Notebook, Data Wrangler | มีหน้าจอสรุปสถิติและสร้างโค้ด PySpark อัตโนมัติ |
 | **4. ทดลองโมเดล** | MLflow Experiment & Runs | บันทึกประวัติการทดลอง เปรียบเทียบ AUC อย่างโปร่งใส |
 | **5. ลงทะเบียนโมเดล** | Fabric ML Model (Model Registry) | ควบคุมเวอร์ชัน (Versioning) และพร้อมใช้งานในองค์กร |
@@ -78,7 +78,7 @@ flowchart TD
 ## Lab 0 (สรุปภารกิจ)
 
 - ลงทะเบียน Fabric Trial ของตนเอง แล้วสร้าง Workspace และ Lakehouse `lh_freshmart` ของตนเอง
-- ยืนยันไฟล์ดิบและตาราง Bronze พร้อมใช้
+- ยืนยันความพร้อมของไฟล์ข้อมูลต้นทางและตาราง Bronze
 - แนบ Lakehouse เป็นค่าเริ่มต้นของ Notebook
 
 รายละเอียด: [00-lakehouse-setup.md](../labs/instructions/00-lakehouse-setup.md)

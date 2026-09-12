@@ -11,12 +11,12 @@ Repository ชุดปฏิบัติการวิทยาศาสตร
 
 ```mermaid
 flowchart TD
-    subgraph S1 ["1. แหล่งข้อมูลดิบ (Landing Zone)"]
-        CSV["📄 <b>ไฟล์ข้อมูลดิบ (Files/raw/)</b><br/>freshmart_transactions.csv (3,000 แถว) & customers.csv (1,500 แถว)"]
+    subgraph S1 ["1. รับไฟล์ข้อมูลต้นทาง (Source Landing Zone)"]
+        CSV["📄 <b>ไฟล์ข้อมูลต้นทาง (Files/raw/)</b><br/>freshmart_transactions.csv (3,000 แถว) & customers.csv (1,500 แถว)"]
     end
 
     subgraph S2 ["2. OneLake & Medallion Architecture (Lakehouse)"]
-        B["🥉 <b>Bronze Schema</b><br/>ตาราง Delta ข้อมูลดิบ bronze.transactions & customers (Lab 0)"]
+        B["🥉 <b>Bronze Schema</b><br/>ตาราง Delta ชั้นต้นทาง bronze.transactions & customers (Lab 0)"]
         S["🥈 <b>Silver Schema</b><br/>ตารางฟีเจอร์ silver.customer_features (Lab 2: Data Wrangler)"]
         B -->|ทำความสะอาด & สเกลฟีเจอร์| S
     end
