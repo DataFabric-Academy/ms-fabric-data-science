@@ -113,3 +113,8 @@ mlflow.register_model(f"runs:/{champion_run_id}/model", "freshmart-churn-model")
 pytest labs/tests/test_churn_model.py -v
 python labs/scripts/run_local_pipeline.py
 ```
+
+## ต่อไป
+
+ผู้เรียน: ไป [Lab 4 — ทำนายเป็นชุด](04-batch-predict.md) ด้วยโมเดล `freshmart-churn-model`  
+ผู้สอน (ทางเลือก): สาธิต AutoML ตาม [instructor-automl-demo.md](instructor-automl-demo.md) ก่อนเข้า Lab 4 — ห้ามทับชื่อโมเดลของแล็บนี้

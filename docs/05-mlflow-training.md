@@ -120,6 +120,9 @@ with mlflow.start_run(run_name="rf-baseline"):
 FLAML เป็นไลบรารีช่วยเลือกโมเดลและค่าตั้งอัตโนมัติในเวลาจำกัด — ใช้เมื่อต้องการโมเดลเส้นฐานเร็วและคุมงบประมวลผล  
 ยังต้องเข้าใจเมตริกและการแบ่งข้อมูลเอง AutoML ไม่แทนที่การนิยามโจทย์ธุรกิจ
 
+เนื้อหาเต็มและการตัดสินใจในห้องเรียนอยู่ที่ [09 — AutoML บน Fabric](09-automl.md)  
+ผู้สอนสาธิตหลัง Lab 3 ตาม [instructor-automl-demo.md](../labs/instructions/instructor-automl-demo.md) — อย่าแทนที่ `freshmart-churn-model` ของแล็บนี้
+
 ## Lab 3
 
 - คู่มือ: [03-train-track-mlflow.md](../labs/instructions/03-train-track-mlflow.md)
@@ -136,4 +139,5 @@ FLAML เป็นไลบรารีช่วยเลือกโมเด�
 
 ## ต่อไป
 
-อ่านต่อ: [06 — สร้างคำทำนายแบบชุดด้วย PREDICT](06-batch-predict.md)
+อ่านทางเลือก: [09 — AutoML บน Fabric](09-automl.md)  
+อ่านต่อเส้นหลัก: [06 — สร้างคำทำนายแบบชุดด้วย PREDICT](06-batch-predict.md)

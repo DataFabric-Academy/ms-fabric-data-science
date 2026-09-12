@@ -8,6 +8,7 @@
 | Docs ทฤษฎี | [../docs/README.md](../docs/README.md) |
 | อภิธานศัพท์ | [../docs/glossary.md](../docs/glossary.md) |
 | มาตรฐานภาษาไทย | [../docs/writing-style-th.md](../docs/writing-style-th.md) |
+| AutoML (ทางเลือก) | [../docs/09-automl.md](../docs/09-automl.md) · [Demo ผู้สอน](instructions/instructor-automl-demo.md) |
 
 ## เส้นทางผู้เรียน
 
@@ -73,6 +74,15 @@ flowchart TD
 | **2** | [02-preprocess-data-wrangler.md](instructions/02-preprocess-data-wrangler.md) | `02-preprocess-data-wrangler.ipynb` | ตาราง `silver.customer_features` และไฟล์ `feature_params.json` |
 | **3** | [03-train-track-mlflow.md](instructions/03-train-track-mlflow.md) | `03-train-track-mlflow.ipynb` | Experiment เปรียบเทียบสองโมเดล และ Champion `freshmart-churn-model` |
 | **4** | [04-batch-predict.md](instructions/04-batch-predict.md) | `04-batch-predict.ipynb` | ตาราง Delta `gold.freshmart_predictions` สำหรับทีมการตลาด |
+
+## สำหรับผู้สอน (ทางเลือก หลัง Lab 3)
+
+สาธิต AutoML บน workspace ของผู้สอนเท่านั้น ผู้เรียนดู ไม่รันตามทั้งคลาส และห้ามทับ `freshmart-churn-model`
+
+| เอกสาร | ใช้เมื่อ |
+| :--- | :--- |
+| ทฤษฎี [09-automl.md](../docs/09-automl.md) | อธิบายว่า AutoML ทำอะไรให้ และอะไรยังเป็นหน้าที่คน |
+| คู่มือ [instructor-automl-demo.md](instructions/instructor-automl-demo.md) | เดินตัวช่วย Quick Prototype 8–12 นาที ก่อนเข้า Lab 4 |
 
 
 ## ข้อมูลที่ใช้

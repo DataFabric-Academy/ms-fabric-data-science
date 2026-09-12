@@ -52,8 +52,9 @@
 
 1. ทำ Learning Path ให้ครบ: [Implement data science & machine learning for AI in Fabric](https://learn.microsoft.com/training/paths/implement-data-science-machine-learning-fabric/)  
 2. ทำ tutorial ทางการแบบครบวงจร: [Data science scenario](https://learn.microsoft.com/fabric/data-science/tutorial-data-science-introduction)  
-3. ต่อยอด Lakehouse / Spark / ธรรมาภิบาลตามบทบาท  
-4. ดูเส้นทางใบรับรองที่เกี่ยวข้องกับ Fabric ตามบทบาทปัจจุบันบน Microsoft Learn  
+3. ดู AutoML แบบทางเลือก: [09-automl.md](09-automl.md) และ [Demo ผู้สอน](../labs/instructions/instructor-automl-demo.md)  
+4. ต่อยอด Lakehouse / Spark / ธรรมาภิบาลตามบทบาท  
+5. ดูเส้นทางใบรับรองที่เกี่ยวข้องกับ Fabric ตามบทบาทปัจจุบันบน Microsoft Learn  
 
 ## กลับไปปฏิบัติ
 

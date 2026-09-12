@@ -38,6 +38,10 @@ https://learn.microsoft.com/training/paths/implement-data-science-machine-learni
 | PREDICT scoring | https://learn.microsoft.com/fabric/data-science/model-scoring-predict |
 | Semantic Link | https://learn.microsoft.com/fabric/data-science/semantic-link-overview |
 | MLflow autologging | https://learn.microsoft.com/fabric/data-science/mlflow-autologging |
+| Automated ML in Fabric | https://learn.microsoft.com/fabric/data-science/automated-ml-fabric |
+| Low-code AutoML | https://learn.microsoft.com/fabric/data-science/low-code-automl |
+| Code-first AutoML (FLAML) | https://learn.microsoft.com/fabric/data-science/python-automated-machine-learning-fabric |
+| สร้างโมเดลด้วย Automated ML | https://learn.microsoft.com/fabric/data-science/how-to-use-automated-machine-learning-fabric |
 
 ## สไลด์ใน repo (โฟลเดอร์ `Source/` — ไม่ติด git ตาม `.gitignore`)
 
@@ -59,6 +63,7 @@ https://learn.microsoft.com/training/paths/implement-data-science-machine-learni
 | 2 | [instructions/02-preprocess-data-wrangler.md](../labs/instructions/02-preprocess-data-wrangler.md) | `02-preprocess-data-wrangler.ipynb` |
 | 3 | [instructions/03-train-track-mlflow.md](../labs/instructions/03-train-track-mlflow.md) | `03-train-track-mlflow.ipynb` |
 | 4 | [instructions/04-batch-predict.md](../labs/instructions/04-batch-predict.md) | `04-batch-predict.ipynb` |
+| Demo (ผู้สอน) | [instructions/instructor-automl-demo.md](../labs/instructions/instructor-automl-demo.md) | สมุดโค้ดที่ตัวช่วย AutoML สร้าง — อย่าทับ Lab 3–4 |
 
 เริ่มที่ [labs/README.md](../labs/README.md)
 

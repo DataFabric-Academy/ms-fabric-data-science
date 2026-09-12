@@ -61,7 +61,8 @@ flowchart TD
 | Train and track with MLflow | M05 | Lab 3 | โมเดล Champion `freshmart-churn-model` บน Model Registry |
 | Generate batch predictions | M06 | Lab 4 | ตาราง `gold.freshmart_predictions` พร้อมส่งต่อ Power BI |
 
-*M07–M08 เป็นเนื้อหาขยายฉบับ Instructor Edition (Copilot, Semantic Link, และ Roadmap 30 วัน)*
+*M07–M08 เป็นเนื้อหาขยายฉบับ Instructor Edition (Copilot, Semantic Link, และ Roadmap 30 วัน)*  
+*หลัง Lab 3 ผู้สอนอาจสาธิต AutoML แบบทางเลือก — ดู [09-automl.md](09-automl.md) และ [คู่มือ Demo](../labs/instructions/instructor-automl-demo.md) ไม่แทนที่โมเดล Champion ของ Lab 3*
 
 
 ## สภาพแวดล้อมที่ต้องมี
