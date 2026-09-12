@@ -23,7 +23,7 @@ flowchart LR
     --> Step4["4. คลิก Apply<br/>บันทึกขั้นตอนใน Recipe"]
     --> Step5["5. คลิก Add code to notebook<br/>สร้างโค้ด Python ที่รันซ้ำได้"]
 
-    classDef step fill:#e3f2fd,stroke:#1565c0,stroke-width:1.5px;
+    classDef step fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
     class Step1,Step2,Step3,Step4,Step5 step;
 ```
 
@@ -41,18 +41,26 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    subgraph Bad["❌ วิธีที่ผิด: ข้อมูลรั่วไหล (Data Leakage)"]
+    subgraph Bad ["❌ วิธีที่ผิด: ข้อมูลรั่วไหล (Data Leakage)"]
         A1["ข้อมูลทั้งหมด (100%)"] --> B1["คำนวณค่าเฉลี่ยเติม Age / ปรับสเกลข้อมูล"]
         B1 --> C1["แบ่ง Train / Test"]
-        style Bad fill:#ffebee,stroke:#c62828
     end
 
-    subgraph Good["✅ วิธีที่ถูกต้อง: ปลอดภัยและได้มาตรฐานระดับสากล"]
+    subgraph Good ["✅ วิธีที่ถูกต้อง: ปลอดภัยและได้มาตรฐานระดับสากล"]
         A2["ข้อมูลทั้งหมด (100%)"] --> B2["แบ่งชุดข้อมูลก่อน (Train 80% / Test 20%)"]
         B2 --> C2["ชุดฝึก (Train Set)<br/>คำนวณสถิติ เช่น Mean Age = 38.5, Scaler Min/Max"]
         C2 -->|บันทึกไว้ใน feature_params.json| D2["ชุดทดสอบ และ ข้อมูลจริงในอนาคต (Test & Scoring)<br/>นำค่าที่จำไว้มาแปลง ห้ามคำนวณค่าเฉลี่ยใหม่!"]
-        style Good fill:#e8f8f5,stroke:#117a65
     end
+
+    classDef badBox fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#991b1b;
+    classDef badNode fill:#ffffff,stroke:#ef4444,stroke-width:1.5px,color:#7f1d1d;
+    classDef goodBox fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef goodNode fill:#ffffff,stroke:#22c55e,stroke-width:1.5px,color:#14532d;
+
+    class Bad badBox;
+    class A1,B1,C1 badNode;
+    class Good goodBox;
+    class A2,B2,C2,D2 goodNode;
 ```
 
 > [!IMPORTANT]

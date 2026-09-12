@@ -27,33 +27,41 @@
 
 ```mermaid
 flowchart TD
-    subgraph Lab0["Lab 0: เตรียมสภาพแวดล้อม"]
-        L0["สร้าง lh_freshmart (เปิด Schemas)<br/>อัปโหลด CSV 3 ไฟล์สู่ Files/raw/<br/>สร้างตาราง bronze.transactions & customers"]
+    subgraph Lab0 ["Lab 0: เตรียมสภาพแวดล้อม"]
+        L0["<b>Lab 0: ตั้งค่าสภาพแวดล้อม</b><br/>• สร้าง Lakehouse lh_freshmart (เปิด Schemas)<br/>• อัปโหลด CSV สู่ Files/raw/<br/>• สร้างตาราง Delta ใน schema bronze"]
     end
 
-    subgraph Lab1["Lab 1: สำรวจข้อมูล (EDA)"]
-        L1["วิเคราะห์ของเสีย & Churn Rate (~19.3%)<br/>ตรวจพบ Age ว่าง 37 รายการ<br/>พล็อตกราฟ Correlation & Distribution"]
+    subgraph Lab1 ["Lab 1: สำรวจข้อมูล (EDA)"]
+        L1["<b>Lab 1: สำรวจข้อมูลเบื้องต้น</b><br/>• วิเคราะห์ยอดขายและอัตรา Churn (~19.3%)<br/>• ตรวจพบค่าว่าง Age 37 ค่า<br/>• ตรวจสอบสหสัมพันธ์ ป้องกัน Data Leakage"]
     end
 
-    subgraph Lab2["Lab 2: เตรียมฟีเจอร์ด้วย Data Wrangler"]
-        L2["คลิกทำความสะอาดผ่าน UI แล้ว Add Code<br/>บันทึก feature_params.json ป้องกัน Data Leakage<br/>สร้างตาราง silver.customer_features"]
+    subgraph Lab2 ["Lab 2: เตรียมฟีเจอร์ด้วย Data Wrangler"]
+        L2["<b>Lab 2: วิศวกรรมฟีเจอร์</b><br/>• ใช้ Data Wrangler แบบ Interactive<br/>• บันทึก feature_params.json ป้องกันข้อมูลรั่วไหล<br/>• เขียนตาราง silver.customer_features"]
     end
 
-    subgraph Lab3["Lab 3: ฝึกและติดตามโมเดลด้วย MLflow"]
-        L3["Experiment: freshmart-churn<br/>Run 1: Decision Tree (AUC ≈ 0.77)<br/>Run 2: Random Forest (AUC ≈ 0.86 ⭐)<br/>ลงทะเบียน Champion สู่ Model Registry"]
+    subgraph Lab3 ["Lab 3: ฝึกและติดตามโมเดลด้วย MLflow"]
+        L3["<b>Lab 3: การทดลองและคัดเลือกโมเดล</b><br/>• ทดลอง Decision Tree (AUC ≈ 0.77)<br/>• ทดลอง Random Forest (AUC ≈ 0.86 ⭐)<br/>• ลงทะเบียน Champion สู่ Model Registry"]
     end
 
-    subgraph Lab4["Lab 4: ทำนายผลเป็นชุดสู่ Gold"]
-        L4["โหลด Scoring Batch 200 รายการ<br/>รันฟังก์ชัน PREDICT บน Spark<br/>เขียนผลลง gold.freshmart_predictions<br/>พร้อมส่งต่อแดชบอร์ด Power BI"]
+    subgraph Lab4 ["Lab 4: ทำนายผลเป็นชุดสู่ Gold"]
+        L4["<b>Lab 4: ทำนายผลเป็นชุด (Batch Scoring)</b><br/>• ทำนายลูกค้าใหม่ 200 รายด้วยฟังก์ชัน PREDICT<br/>• เขียนคะแนนความเสี่ยงลง gold.freshmart_predictions<br/>• เชื่อมต่อรายงาน Power BI ด้วย Direct Lake"]
     end
 
     Lab0 --> Lab1 --> Lab2 --> Lab3 --> Lab4
 
-    style Lab0 fill:#f9fbe7,stroke:#827717
-    style Lab1 fill:#e0f2f1,stroke:#004d40
-    style Lab2 fill:#e1f5fe,stroke:#01579b
-    style Lab3 fill:#f3e5f5,stroke:#4a148c
-    style Lab4 fill:#fff8e1,stroke:#ff6f00
+    classDef stage fill:#f8fafc,stroke:#475569,stroke-width:2px,color:#0f172a;
+    classDef node0 fill:#ffffff,stroke:#65a30d,stroke-width:2px,color:#1a2e05;
+    classDef node1 fill:#f0fdfa,stroke:#0d9488,stroke-width:2px,color:#134e4a;
+    classDef node2 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef node3 fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef node4 fill:#fffbeb,stroke:#d97706,stroke-width:2px,color:#78350f;
+
+    class Lab0,Lab1,Lab2,Lab3,Lab4 stage;
+    class L0 node0;
+    class L1 node1;
+    class L2 node2;
+    class L3 node3;
+    class L4 node4;
 ```
 
 ## ลำดับแล็บและผลลัพธ์ที่คาดหวัง

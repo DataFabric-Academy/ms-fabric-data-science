@@ -18,8 +18,13 @@ flowchart TD
     EDA --> StepC["<b>3. วินิจฉัยค่าว่าง 3 รูปแบบ</b><br/>MCAR (สุ่มแท้), MAR (อิงตัวแปรอื่น), MNAR (หายเพราะตัวเอง)"]
     EDA --> StepD["<b>4. ตรวจสอบความสัมพันธ์ & กับดัก</b><br/>Correlation Matrix, ฟีเจอร์ซ้ำซ้อน, ข้อมูลรั่วไหล (Data Leakage)"]
 
-    style EDA fill:#e8eaf6,stroke:#283593,stroke-width:1.5px
-    style StepD fill:#ffebee,stroke:#c62828,stroke-width:1.5px
+    classDef edaHead fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef edaStep fill:#f8fafc,stroke:#475569,stroke-width:1.5px,color:#0f172a;
+    classDef edaAlert fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#991b1b;
+
+    class EDA edaHead;
+    class StepA,StepB,StepC edaStep;
+    class StepD edaAlert;
 ```
 
 การทำ EDA ช่วยตอบคำถามสำคัญทางธุรกิจ เช่น:

@@ -23,8 +23,17 @@ graph TD
     Run2 -->|เลือกเป็น Champion Model| Reg["<b>Model Registry:</b> freshmart-churn-model"]
     Reg --> V1["Version 1 (พร้อม Model Signature สำหรับฟังก์ชัน PREDICT)"]
 
-    style Run2 fill:#d4efdf,stroke:#229954,stroke-width:2px
-    style Reg fill:#d6eaf8,stroke:#2980b9,stroke-width:2px
+    classDef expHead fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef runNormal fill:#f8fafc,stroke:#475569,stroke-width:1.5px,color:#0f172a;
+    classDef runChampion fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef regStyle fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef verStyle fill:#ffffff,stroke:#b45309,stroke-width:1.5px,color:#78350f;
+
+    class Exp expHead;
+    class Run1,Run3 runNormal;
+    class Run2 runChampion;
+    class Reg regStyle;
+    class V1 verStyle;
 ```
 
 ## ลำดับชั้นของ MLflow บน Fabric
@@ -65,8 +74,13 @@ flowchart LR
     C -->|ใช่: จัดลำดับถูกต้อง| D["เพิ่มค่า AUC"]
     C -->|ไม่ใช่: จัดลำดับผิด| E["ลดค่า AUC"]
 
-    style D fill:#d4efdf,stroke:#27ae60
-    style E fill:#fadbd8,stroke:#e74c3c
+    classDef flowNode fill:#f8fafc,stroke:#475569,stroke-width:1.5px,color:#0f172a;
+    classDef successNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef failNode fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#991b1b;
+
+    class A,B,C flowNode;
+    class D successNode;
+    class E failNode;
 ```
 
 ## เมตริกอื่น ๆ ที่สะท้อนต้นทุนธุรกิจ

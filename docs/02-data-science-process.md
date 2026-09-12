@@ -38,10 +38,17 @@ flowchart TD
     Step1 --> Step2 --> Step3 --> Step4 --> Step5
     Step5 -.->|ฟีดแบ็กจากแคมเปญจริง / พฤติกรรมเปลี่ยน| Step1
 
-    style Step1 fill:#fff3e0,stroke:#e65100,stroke-width:1.5px
-    style Step3 fill:#e8f5e9,stroke:#2e7d32,stroke-width:1.5px
-    style Step4 fill:#e1f5fe,stroke:#0288d1,stroke-width:1.5px
-    style Step5 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1.5px
+    classDef step1 fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#7c2d12;
+    classDef step2 fill:#f1f5f9,stroke:#475569,stroke-width:2px,color:#0f172a;
+    classDef step3 fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef step4 fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a;
+    classDef step5 fill:#faf5ff,stroke:#9333ea,stroke-width:2px,color:#581c87;
+
+    class Step1 step1;
+    class Step2 step2;
+    class Step3 step3;
+    class Step4 step4;
+    class Step5 step5;
 ```
 
 > [!NOTE]

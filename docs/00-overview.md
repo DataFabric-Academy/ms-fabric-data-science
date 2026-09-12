@@ -41,9 +41,9 @@ flowchart TD
     M06 --> M07["M07: Copilot, Semantic Link & Responsible AI"]
     M07 --> M08["M08: สรุปผลลัพธ์และแผนปฏิบัติการ 30 วัน"]
 
-    classDef foundation fill:#f1f8e9,stroke:#558b2f,stroke-width:1px;
-    classDef core fill:#e1f5fe,stroke:#0277bd,stroke-width:1.5px;
-    classDef advance fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1px;
+    classDef foundation fill:#f1f8e9,stroke:#558b2f,stroke-width:1.5px,color:#1b5e20;
+    classDef core fill:#e1f5fe,stroke:#0277bd,stroke-width:2px,color:#01579b;
+    classDef advance fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1.5px,color:#4a148c;
     
     class M00,M01,M02 foundation;
     class M03,M04,M05,M06 core;

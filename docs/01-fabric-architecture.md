@@ -79,7 +79,16 @@ flowchart TD
     BronzeSchema -->|Lab 2: Data Wrangler & Feature Engineering| SilverSchema
     SilverSchema -->|Lab 4: PREDICT Function| GoldSchema
 
-    classDef schemaBox fill:#ffffff,stroke:#2b5797,stroke-width:1.5px;
+    classDef fileNode fill:#f1f5f9,stroke:#64748b,stroke-width:1.5px,color:#0f172a;
+    classDef bronzeNode fill:#fffbeb,stroke:#d97706,stroke-width:1.5px,color:#78350f;
+    classDef silverNode fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px,color:#14532d;
+    classDef goldNode fill:#fef3c7,stroke:#b45309,stroke-width:2px,color:#78350f;
+    classDef schemaBox fill:#ffffff,stroke:#2b5797,stroke-width:1.5px,color:#0f172a;
+
+    class RAW fileNode;
+    class BT,BC bronzeNode;
+    class SF silverNode;
+    class GP goldNode;
     class BronzeSchema,SilverSchema,GoldSchema schemaBox;
 ```
 
