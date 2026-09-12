@@ -2,24 +2,16 @@
 
 ในแล็บนี้คุณจะฝึกโมเดลทำนาย Churn ของ FreshMart สองตัว เทียบคะแนนด้วย MLflow แล้วบันทึกโมเดลที่ดีที่สุด
 
-แล็บนี้ใช้เวลาประมาณ **25–35** นาที
+แล็บนี้ใช้เวลาประมาณ **25–35** นาที  
+ศัพท์ที่ใช้ในแล็บนี้อธิบายไว้ที่ [อภิธานศัพท์](../../docs/glossary.md) โดยเฉพาะ [MLflow](../../docs/glossary.md#mlflow) · [AUC](../../docs/glossary.md#auc-area-under-the-roc-curve) · [โมเดลเส้นฐาน](../../docs/glossary.md#โมเดลเส้นฐาน-baseline) · [โมเดลที่เลือกใช้](../../docs/glossary.md#โมเดลที่เลือกใช้-champion) · [stratify](../../docs/glossary.md#stratify)
+
+ชุดนี้ทำนาย **Churn 0/1** (จำแนกประเภท) ซึ่งใกล้งานนักวิเคราะห์ร้านค้าจริง
 
 ## สิ่งที่ต้องมี
 
 - ตาราง `silver.customer_features` และ `Files/params/feature_params.json` จาก Lab 2
-- Import `labs/notebooks/03-train-track-mlflow.ipynb` → ชื่อ `03_FreshMart_Model_Training_MLflow`
+- Import `labs/notebooks/03-train-track-mlflow.ipynb` แล้วตั้งชื่อ `03_FreshMart_Model_Training_MLflow`
 - แนบ `lh_freshmart`
-
-## คำสั้น ๆ ที่ใช้ในแล็บ
-
-| คำ | ความหมาย |
-| --- | --- |
-| Experiment | สมุดบันทึกการทดลองใน Workspace |
-| Run | หนึ่งครั้งที่ฝึกโมเดล |
-| AUC | คะแนนแยกคนมีแนวโน้ม Churn กับคนที่อยู่ต่อ (ใกล้ 1 ดีกว่า) |
-| Register model | เก็บโมเดลชนะไว้ชื่อ `freshmart-churn-model` |
-
-ชุดนี้ทำนาย **Churn 0/1** (classification) ซึ่งใกล้งาน Analyst ร้านค้าจริง
 
 ## แยกชุดฝึก / ทดสอบ
 
@@ -31,7 +23,10 @@ random_state=42
 stratify=y
 ```
 
-**จุดตรวจ:** Train **1,200** แถว, Test **300** แถว, ฟีเจอร์ **14** คอลัมน์  
+`random_state=42` ทำให้การสุ่มซ้ำได้ผลเดิมทั้งคลาส  
+`stratify=y` ทำให้สัดส่วน Churn ในชุดฝึกและชุดทดสอบใกล้เคียงกัน
+
+**สิ่งที่ควรเห็น:** ชุดฝึก **1,200** แถว ชุดทดสอบ **300** แถว ฟีเจอร์ **14** คอลัมน์  
 อย่าใส่ `CustomerID` หรือ `Churn` ลงใน X
 
 ## สร้าง Experiment
@@ -42,9 +37,9 @@ experiment_name = "freshmart-churn-prediction"
 mlflow.set_experiment(experiment_name)
 ```
 
-Fabric สร้าง item ประเภท **Experiment** ใน Workspace ให้อัตโนมัติ
+Fabric สร้างรายการประเภท **Experiment** ใน Workspace ให้อัตโนมัติ — เป็นสมุดรวมผลการทดลอง
 
-## ฝึก Baseline — Decision Tree
+## ฝึกโมเดลเส้นฐาน — Decision Tree
 
 รันเซลล์ `Run_01_DecisionTree_Baseline`:
 
@@ -59,7 +54,7 @@ with mlflow.start_run():
 
 พารามิเตอร์ เมตริก และ artifact ถูกบันทึกอัตโนมัติ
 
-## ฝึก Champion — Random Forest
+## ฝึกโมเดลที่เลือกใช้ — Random Forest
 
 รันเซลล์ `Run_02_RandomForest_Champion`:
 
@@ -72,21 +67,22 @@ with mlflow.start_run():
     model.fit(X_train, y_train)
 ```
 
-**จุดตรวจจากชุดนี้ (seed 42):** Random Forest `test_roc_auc` ≈ **0.86** สูงกว่า Decision Tree ≈ **0.77**
+**สิ่งที่ควรเห็นจากชุดนี้ (seed 42):** Random Forest ได้ `test_roc_auc` ประมาณ **0.86** สูงกว่า Decision Tree ประมาณ **0.77**  
+(AUC วัดความสามารถแยกคนมีแนวโน้ม Churn กับคนที่อยู่ต่อ — ใกล้ 1 ดีกว่า)
 
-ถ้า RF แพ้: ตรวจว่าฟีเจอร์หลุดคอลัมน์หรือถูก scale ซ้ำ
+ถ้า Random Forest แพ้: ตรวจว่าฟีเจอร์หลุดคอลัมน์หรือถูก scale ซ้ำ
 
-## สำรวจ Experiment บน UI
+## สำรวจ Experiment บนหน้าจอ Fabric
 
 1. กลับไปที่ Workspace
 2. เปิด **Experiment** ชื่อ `freshmart-churn-prediction`  
-   > Tip: ถ้ายังไม่เห็นรัน ให้ Refresh หน้า
+   > ถ้ายังไม่เห็นรัน ให้ Refresh หน้า
 3. ติ๊กทั้งสองรัน เทียบ `test_roc_auc` และ `test_f1_score`
-4. เปิด Artifacts ของรัน RF — ต้องเห็น `confusion_matrix.png` และโฟลเดอร์ `model/`
+4. เปิด Artifacts ของรัน Random Forest — ต้องเห็น `confusion_matrix.png` และโฟลเดอร์ `model/`
 
-ปรับกราฟเปรียบเทียบได้: เปลี่ยน visualization เป็น bar / เปลี่ยนแกนเป็นชื่อ estimator
+ปรับกราฟเปรียบเทียบได้: เปลี่ยน visualization เป็น bar หรือเปลี่ยนแกนเป็นชื่อ estimator
 
-## บันทึกโมเดลชนะ
+## บันทึกโมเดลที่ชนะ
 
 เซลล์สุดท้ายค้นหารันที่ AUC สูงสุดแล้วลงทะเบียน:
 
@@ -94,10 +90,10 @@ with mlflow.start_run():
 mlflow.register_model(f"runs:/{champion_run_id}/model", "freshmart-churn-model")
 ```
 
-หรือจาก UI ของ Experiment: **Save as ML model** → สร้างโมเดลใหม่ชื่อ `freshmart-churn-model`
+หรือจากหน้า Experiment: **Save as ML model** แล้วสร้างโมเดลใหม่ชื่อ `freshmart-churn-model`
 
-**จุดตรวจ:** Workspace มี **Model** ชื่อ `freshmart-churn-model` Version 1  
-Schema ต้องตรง 14 ฟีเจอร์ของ Lab 2
+**สิ่งที่ควรเห็น:** Workspace มี **Model** ชื่อ `freshmart-churn-model` Version 1  
+โครงคอลัมน์ต้องตรง 14 ฟีเจอร์ของ Lab 2
 
 ## บันทึก notebook และจบ session
 
@@ -107,7 +103,7 @@ Schema ต้องตรง 14 ฟีเจอร์ของ Lab 2
 ## ผ่านแล็บเมื่อ
 
 - [ ] มีอย่างน้อย 2 รันใน Experiment
-- [ ] RF ชนะ DT ตาม AUC
+- [ ] Random Forest ได้ AUC สูงกว่า Decision Tree
 - [ ] โมเดลลงทะเบียนแล้ว
 - [ ] `Lab 3 verification passed`
 

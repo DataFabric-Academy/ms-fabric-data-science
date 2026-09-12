@@ -24,7 +24,7 @@ Fabric skill (medallion) แนะนำ lakehouse แบบ schema-enabled:
 | Import notebook + แนบ `lh_freshmart` | เหมือนเดิม | ไม่มีขั้นเพิ่ม |
 | จุดตรวจ 3,000 / 1,500 / 200 | เหมือนเดิม | ไม่เปลี่ยน |
 
-Loader ใน notebook ยังลองชื่อเก่าเป็น fallback ชั่วคราว — คลาสที่ยังไม่ migrate ก็รันได้
+Loader ใน notebook ยังลองชื่อเก่าเป็นทางเลือกสำรอง (fallback) ชั่วคราว — คลาสที่ยังไม่ migrate ก็รันได้
 
 ## ขั้นตอน migrate (ครั้งเดียวต่อ workspace)
 

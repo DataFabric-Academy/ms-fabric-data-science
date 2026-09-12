@@ -1,11 +1,16 @@
 # Microsoft Fabric Data Science — FreshMart Labs
 
-Repository ชุดปฏิบัติการ Data Science บน Microsoft Fabric ใช้กรณีศึกษา **FreshMart Customer Churn**  
-กลุ่มเป้าหมาย: **Analyst ที่อยากเข้าใจ Data Science**
+Repository ชุดปฏิบัติการวิทยาศาสตร์ข้อมูลบน Microsoft Fabric ใช้กรณีศึกษา **FreshMart Customer Churn** (ทำนายลูกค้าที่จะเลิกซื้อ)  
+กลุ่มเป้าหมาย: **นักวิเคราะห์ข้อมูลที่อยากเข้าใจวงจรงานวิทยาศาสตร์ข้อมูล**  
+หลักสูตรอ้างอิง: [Implement a data science and machine learning solution for AI in Microsoft Fabric](https://learn.microsoft.com/training/paths/implement-data-science-machine-learning-fabric/) (พร้อมสไลด์ Instructor)
 
-เริ่มที่ [labs/README.md](labs/README.md)
+| เริ่มที่ | ลิงก์ |
+| --- | --- |
+| Docs ความรู้ (ทฤษฎี + อภิธานศัพท์) | [docs/README.md](docs/README.md) |
+| อภิธานศัพท์ | [docs/glossary.md](docs/glossary.md) |
+| Labs มือบน | [labs/README.md](labs/README.md) |
 
-ผู้เรียน: **`git clone` → Import notebook จาก `labs/notebooks/` → แนบ `lh_freshmart`** ใน workspace **`labs`**
+เส้นทางผู้เรียน: อ่าน [docs](docs/README.md) ตามโมดูล จากนั้น `git clone` repository นี้ นำเข้า notebook จาก `labs/notebooks/` และแนบ lakehouse `lh_freshmart` ใน workspace **`labs`**
 
 ## ตรวจว่าแล็บใช้งานได้จริง
 
@@ -15,4 +20,4 @@ pytest labs/tests -v
 python labs/scripts/run_local_pipeline.py
 ```
 
-จากนั้นทำตามคู่มือใน `labs/instructions/` บน Fabric Trial / Capacity
+จากนั้นทำตามคู่มือใน `labs/instructions/` บน Fabric Trial หรือ Capacity

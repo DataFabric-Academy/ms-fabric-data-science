@@ -163,19 +163,16 @@ def build() -> None:
 2. แนบ Default Lakehouse = **`lh_freshmart`** (ซ้ายมือของ notebook)
 3. รอ Spark ขึ้น Ready (รอบแรก 1–2 นาทีได้ — **อย่ารันหลายเซลล์ซ้อน**)
 
-### คำศัพท์สั้น ๆ
-| คำ | ความหมาย |
-| --- | --- |
-| Lakehouse | ที่เก็บไฟล์ + ตารางใน OneLake |
-| Bronze | ชั้นข้อมูลดิบที่ instructor เตรียมไว้ |
-| `bronze.transactions` | ตารางธุรกรรมใน schema `bronze` |
+### ศัพท์ที่ใช้ในแล็บนี้
+Lakehouse คือที่เก็บไฟล์และตารางใน OneLake ชั้น Bronze คือข้อมูลดิบที่ผู้สอนเตรียมไว้ เช่นตาราง `bronze.transactions`  
+อธิบายเพิ่ม: ดูอภิธานศัพท์ใน repository ที่ `docs/glossary.md`
 
 ### ถ้าติด — อ่านก่อนถาม TA
 | อาการ | ทำอะไร |
 | --- | --- |
-| `Spark table unavailable` แล้วโหลด CSV | **ปกติ** ถ้ายังเห็นแถวครบ |
+| `Spark table unavailable` แล้วโหลด CSV | **ปกติ** ถ้ายังเห็นแถวครบ (ทางเลือกสำรองอ่านไฟล์ดิบ) |
 | Kernel / Spark Starting ค้าง | รอ แล้วรันเซลล์เดิมอีกครั้งทีละเซลล์ |
-| ไม่เจอไฟล์/ตาราง | แจ้ง instructor — อย่าสร้าง lakehouse เอง |
+| ไม่เจอไฟล์/ตาราง | แจ้งผู้สอน — อย่าสร้าง lakehouse เอง |
 | AssertionError จำนวนแถว | ไม่ผ่าน Lab 0 — อย่าข้ามไป Lab 1 |"""
             ),
             md_cell(
@@ -184,20 +181,20 @@ def build() -> None:
 โค้ดด้านล่างนิยาม `load_table_or_csv` ให้แล้ว — **รันครั้งเดียวแล้วใช้ต่อทุก Lab**
 
 - พยายามอ่านตาราง Lakehouse ก่อน (`bronze.transactions` ฯลฯ)
-- ถ้าไม่มีตาราง จะอ่าน `Files/raw/*.csv` ให้อัตโนมัติ
+- ถ้าไม่มีตาราง จะอ่าน `Files/raw/*.csv` ให้อัตโนมัติ (ทางเลือกสำรอง)
 - ไม่ต้องแก้โค้ดนี้"""
             ),
             code_cell(LOADER),
             md_cell(
                 """### โหลด Bronze แล้วดูตัวอย่างแถว
 
-**โค้ดนี้ทำอะไร:** อ่านตารางสมาชิก + ธุรกรรม แล้วพิมพ์จำนวนแถวและ `head(5)`
+**โค้ดนี้ทำอะไร:** อ่านตารางสมาชิกและธุรกรรม แล้วพิมพ์จำนวนแถวและ `head(5)`
 
-**ต้องเห็น**
-- Transactions ≈ **3,000** แถว
-- Customers ≈ **1,500** แถว
+**สิ่งที่ควรเห็น**
+- Transactions ประมาณ **3,000** แถว
+- Customers ประมาณ **1,500** แถว
 
-ชื่อตารางแบบ `bronze.xxx` = schema.table (มาตรฐาน lakehouse แบบมี schema)"""
+ชื่อตารางแบบ `bronze.xxx` หมายถึง schema.table (มาตรฐาน lakehouse แบบมี schema)"""
             ),
             code_cell(
                 """df_tx = load_table_or_csv("bronze.transactions", "freshmart_transactions.csv")
@@ -216,7 +213,7 @@ display(df_cust.head(5))"""
 **โค้ดนี้ทำอะไร:** ถ้าจำนวนแถวไม่ตรง จะ `raise AssertionError` และหยุด
 
 - ผ่านแล้วจะพิมพ์ `Lab 0 verification passed`
-- ไม่ผ่าน = สภาพแวดล้อมยังไม่พร้อม — **ถาม TA พร้อมคัดลอกข้อความ error ทั้งบรรทัด**"""
+- ไม่ผ่าน แปลว่าสภาพแวดล้อมยังไม่พร้อม — **ถาม TA พร้อมคัดลอกข้อความ error ทั้งบรรทัด**"""
             ),
             code_cell(
                 """if len(df_tx) != 3000:
@@ -239,13 +236,15 @@ print("Lab 0 verification passed")"""
                 """# FreshMart Lab 1: Exploratory Data Analysis
 **Microsoft Fabric Data Science**
 
-บทบาท: **Analyst** — สำรวจข้อมูลก่อนสร้างโมเดล  
+การสำรวจข้อมูลเบื้องต้น (Exploratory Data Analysis) — ดูสถิติ กราฟ และค่าว่าง **ก่อน** สร้างโมเดล
+
+บทบาท: **นักวิเคราะห์ข้อมูล** — สำรวจข้อมูลก่อนสร้างโมเดล  
 จด **3 ข้อสังเกตสั้น ๆ** ส่ง Lab 2 (ไม่ต้องจำสูตรสถิติ)
 
 ### สิ่งที่แล็บนี้ตอบ
 1. ข้อมูลขาดตรงไหน?
 2. ของเสียสูงที่ประเภทสาขาไหน?
-3. คนที่ Churn พฤติกรรมต่างจากคนอยู่ต่ออย่างไร?
+3. คนที่ Churn (เลิกซื้อ) พฤติกรรมต่างจากคนอยู่ต่ออย่างไร?
 
 ### ถ้าติด — อ่านก่อนถาม TA
 | อาการ | ความหมาย |
@@ -265,8 +264,8 @@ print("Lab 0 verification passed")"""
 
 **โค้ดนี้ทำอะไร:** อ่าน `bronze.transactions` แล้วแปลงเป็น Pandas
 
-- `shape` = `(จำนวนแถว, จำนวนคอลัมน์)` → ต้องได้ประมาณ `(3000, 14)`
-- `head()` = ดู 5 แถวแรก เพื่อรู้จักคอลัมน์ เช่น `WasteUnits`, `StoreType`"""
+- `shape` แสดง `(จำนวนแถว, จำนวนคอลัมน์)` — เมื่อถูกต้องควรได้ประมาณ `(3000, 14)`
+- `head()` แสดง 5 แถวแรก เพื่อรู้จักคอลัมน์ เช่น `WasteUnits` (ของเสีย) และ `StoreType`"""
             ),
             code_cell(
                 """df = load_table_or_csv("bronze.transactions", "freshmart_transactions.csv")
@@ -347,8 +346,8 @@ plt.show()"""
 - Heatmap คือตารางสหสัมพันธ์แบบสี
 
 **ค่าอ้างอิงชุดนี้ (ปัด 2 ตำแหน่ง)**
-- DiscountRate ↔ UnitsSold ≈ **+0.38** (ลดราคาแล้วขายดีขึ้น)
-- DiscountRate ↔ WasteUnits ≈ **-0.12** (ลดราคามักเหลือทิ้งน้อยลง)"""
+- DiscountRate กับ UnitsSold ประมาณ **+0.38** (ลดราคาแล้วขายดีขึ้น)
+- DiscountRate กับ WasteUnits ประมาณ **-0.12** (ลดราคามักเหลือทิ้งน้อยลง)"""
             ),
             code_cell(
                 """numeric_cols = ["UnitsSold", "UnitPrice", "DiscountRate", "SalesAmount", "WasteUnits", "WasteCost", "IsWeekend"]
@@ -364,11 +363,11 @@ plt.show()"""
                 """### ขั้นตอนที่ 6: สำรวจ Churn ของสมาชิก
 
 **ความรู้จำเป็น**
-- `Churn = 1` = มีแนวโน้มยกเลิก, `0` = อยู่ต่อ
-- อัตรา Churn ชุดนี้ ≈ **19.3%** (290 จาก 1,500)
-- `Age` ว่าง **37** แถว → Lab 2 จะเติมด้วย median
+- `Churn = 1` หมายถึงมีแนวโน้มยกเลิกหรือเลิกซื้อ, `0` หมายถึงอยู่ต่อ
+- อัตรา Churn ชุดนี้อยู่ที่ประมาณ **19.3%** (290 จาก 1,500)
+- `Age` ว่าง **37** แถว — Lab 2 จะเติมด้วยค่ามัธยฐาน (median)
 
-Scatter ด้านล่าง: คนขาดซื้อนาน (`RecencyDays` สูง) + ร้องเรียนบ่อย มักกระจุกที่ Churn=1"""
+Scatter ด้านล่าง: คนขาดซื้อนาน (`RecencyDays` สูง) และร้องเรียนบ่อย มักกระจุกที่ Churn=1"""
             ),
             code_cell(
                 """df_cust = load_table_or_csv("bronze.customers", "freshmart_customers.csv")
@@ -392,7 +391,7 @@ plt.show()"""
                 """### จุดตรวจ Lab 1
 
 ผ่านแล้วพิมพ์ `Lab 1 verification passed`  
-ก่อนไป Lab 2 จด 3 ข้อ: **เติม Age · แปลงหมวดหมู่ · ปรับสเกลเงิน/ความถี่**"""
+ก่อนไป Lab 2 จด 3 ข้อ: **เติม Age · แปลงหมวดหมู่ · ปรับสเกลเงินและความถี่**"""
             ),
             code_cell(
                 """if len(df) != 3000:
@@ -437,9 +436,9 @@ Lab 4 ทำนายชุดใหม่ 200 คน — **ห้ามคำ�
             md_cell(
                 """### ส่วน A — โหลดธุรกรรมสำหรับ Data Wrangler
 
-**โค้ดนี้ทำอะไร:** โหลดธุรกรรมแล้วสุ่ม **500 แถว** ให้ UI Wrangler เร็วขึ้น
+**โค้ดนี้ทำอะไร:** โหลดธุรกรรมแล้วสุ่ม **500 แถว** ให้หน้าจอ Data Wrangler ตอบสนองเร็วขึ้น
 
-ตัวแปรสำคัญ: **`df`** ← ต้องมีก่อนเปิด Data Wrangler"""
+ตัวแปรสำคัญ: **`df`** ต้องมีก่อนเปิด Data Wrangler"""
             ),
             code_cell(
                 """df = load_table_or_csv("bronze.transactions", "freshmart_transactions.csv")
@@ -450,14 +449,14 @@ df.head(4)"""
             md_cell(
                 """### ส่วน A — ใช้ Data Wrangler (ทำตามทีละข้อ)
 
-1. รอ kernel ว่าง → แท็บ **Home** → **Data Wrangler** → เลือก **`df`**
-2. ดู Summary ของ `WasteCost`
-3. **Format** คอลัมน์ `Category` (Capitalize all words) → Apply
+1. รอ kernel ว่าง จากนั้นแท็บ **Home** เปิด **Data Wrangler** แล้วเลือก **`df`**
+2. ดู Summary ของ `WasteCost` (ต้นทุนของเสีย)
+3. **Format** คอลัมน์ `Category` (Capitalize all words) แล้วกด Apply
 4. ลอง **Filter** `StoreType = Express` และ/หรือ **Sort** `WasteCost` Descending
 5. ลบขั้น Filter/Sort ได้จาก **Cleaning steps** ถ้าต้องการใช้ทั้งตัวอย่าง
-6. **Group by** `Category` + aggregate `WasteCost` (Mean) → **Add code to notebook**
+6. **Group by** `Category` แล้ว aggregate `WasteCost` (Mean) จากนั้นกด **Add code to notebook**
 
-เซลล์ถัดไปเป็นตัวอย่างโครงฟังก์ชัน — ถ้าคุณ Export โค้ดจาก UI มาเอง ให้วางแทนได้"""
+เซลล์ถัดไปเป็นตัวอย่างโครงฟังก์ชัน — ถ้าคุณ Export โค้ดจากหน้าจอมาเอง ให้วางแทนได้"""
             ),
             code_cell(
                 """def summarize_waste(frame: pd.DataFrame) -> pd.DataFrame:
@@ -470,12 +469,12 @@ print(summarize_waste(df))"""
             md_cell(
                 """### ส่วน B — โหลดสมาชิกสำหรับโมเดล
 
-**ทำไมแยกจากส่วน A:** Wrangler ฝึกกับธุรกรรม / โมเดล Churn ใช้ตารางสมาชิก
+**ทำไมแยกจากส่วน A:** Wrangler ฝึกกับธุรกรรม ส่วนโมเดลทำนาย Churn ใช้ตารางสมาชิก
 
-**ต้องเห็น:** shape ≈ `(1500, 11)` และ Age ว่าง **37** แถว
+**สิ่งที่ควรเห็น:** shape ประมาณ `(1500, 11)` และ Age ว่าง **37** แถว
 
 (ทางเลือก) เปิด Wrangler กับ `df_cust` เพื่อลอง Fill / One-hot / Scale  
-**ส่งงาน Lab 3–4 = รันเซลล์สัญญาฟีเจอร์ด้านล่างเท่านั้น**"""
+**ส่งงาน Lab 3–4 ต้องรันเซลล์สัญญาฟีเจอร์ด้านล่างเท่านั้น**"""
             ),
             code_cell(
                 """df_cust = load_table_or_csv("bronze.customers", "freshmart_customers.csv")
@@ -492,7 +491,7 @@ df_cust.head(3)"""
 | --- | --- |
 | เติม Age ด้วย median | ชุดนี้ median = **37.0** |
 | One-hot | แปลง `MembershipTier` / `Gender` เป็นคอลัมน์ 0/1 |
-| Min-max scale | ปรับเงิน/ความถี่ให้อยู่ช่วงประมาณ 0–1 จาก**ชุดฝึก** |
+| Min-max scale | ปรับเงินและความถี่ให้อยู่ช่วงประมาณ 0–1 จาก**ชุดฝึก** |
 
 **รันเซลล์ฟังก์ชันก่อน** แล้วค่อยรันเซลล์ `fit` / `transform`"""
             ),
@@ -580,25 +579,24 @@ print("Lab 2 verification passed")"""
                 """# FreshMart Lab 3: Train and Track Models with MLflow
 **Microsoft Fabric Data Science**
 
-เป้าหมาย: ฝึกโมเดล 2 ตัว → เทียบ AUC → ลงทะเบียนตัวชนะเป็น `freshmart-churn-model`
+**MLflow** เป็นเฟรมเวิร์กโอเพนซอร์สสำหรับติดตามการทดลองโมเดล — Fabric รองรับในตัว  
+เป้าหมาย: ฝึกโมเดล 2 ตัว เปรียบเทียบคะแนน AUC แล้วลงทะเบียนตัวที่ชนะเป็น `freshmart-churn-model`
 
-### คำศัพท์ (จำแค่นี้พอ)
-| คำ | ความหมาย |
-| --- | --- |
-| Experiment | สมุดบันทึกการทดลองใน Workspace |
-| Run | หนึ่งครั้งที่ฝึกโมเดล |
-| AUC | คะแนนแยก Churn กับอยู่ต่อ (ใกล้ 1 ดีกว่า) |
-| Signature | รายชื่อคอลัมน์ที่โมเดลคาดหวัง — ต้องตรง Lab 2 |
+### ศัพท์ที่ใช้ในแล็บนี้
+Experiment คือสมุดรวมผลการทดลองใน Workspace; Run คือหนึ่งครั้งที่ฝึกโมเดล  
+AUC คือคะแนนแยกคนมีแนวโน้ม Churn กับคนที่อยู่ต่อ (ใกล้ 1 ดีกว่า; ประมาณ 0.5 ใกล้เดาสุ่ม)  
+ลายเซ็นโมเดล (signature) คือรายชื่อคอลัมน์ที่โมเดลคาดหวัง — ต้องตรง Lab 2  
+ดูรายละเอียดใน `docs/glossary.md`
 
 ### ค่าอ้างอิงชุดนี้ (seed 42)
-- Decision Tree AUC ≈ **0.77**
-- Random Forest AUC ≈ **0.86** (ควรชนะ)
+- Decision Tree (โมเดลเส้นฐาน) AUC ประมาณ **0.77**
+- Random Forest (โมเดลที่เลือกใช้) AUC ประมาณ **0.86** (ควรชนะ)
 
 ### ถ้าติด — อ่านก่อนถาม TA
 | อาการ | ทำอะไร |
 | --- | --- |
-| หา Experiment ไม่เจอ | Refresh workspace / รันเซลล์ `set_experiment` อีกครั้ง |
-| RF แพ้ DT | ตรวจว่า Lab 2 บันทึก Silver + params ครบ |
+| หา Experiment ไม่เจอ | Refresh workspace หรือรันเซลล์ `set_experiment` อีกครั้ง |
+| Random Forest แพ้ Decision Tree | ตรวจว่า Lab 2 บันทึก Silver และ params ครบ |
 | MLflow unavailable | ในห้องเรียนไม่ควรเกิดบ่อย — ส่งข้อความ error ให้ TA |"""
             ),
             md_cell("### เตรียม loader + ฟังก์ชันฟีเจอร์ (รันตามลำดับ)"),
@@ -613,9 +611,9 @@ print("Lab 2 verification passed")"""
 **โค้ดนี้ทำอะไร**
 1. โหลด `silver.customer_features` (จาก Lab 2)
 2. แยก `X` = ฟีเจอร์, `y` = Churn
-3. แบ่ง Train 80% / Test 20% แบบ `stratify=y` ให้สัดส่วน Churn สมดุล
+3. แบ่ง Train 80% / Test 20% แบบ `stratify=y` ให้สัดส่วน Churn ในทั้งสองชุดใกล้เคียงกัน
 
-**ต้องเห็น:** Train 1,200 · Test 300 · ฟีเจอร์ 14 คอลัมน์  
+**สิ่งที่ควรเห็น:** Train 1,200 แถว · Test 300 แถว · ฟีเจอร์ 14 คอลัมน์  
 อย่าใส่ `CustomerID` หรือ `Churn` ใน X"""
             ),
             code_cell(
@@ -668,11 +666,11 @@ except Exception as exc:
     print(f"MLflow unavailable ({exc}). Training will still run locally.")'''
             ),
             md_cell(
-                """### ขั้นตอนที่ 3: Baseline — Decision Tree
+                """### ขั้นตอนที่ 3: โมเดลเส้นฐาน — Decision Tree
 
-**ความรู้สั้น ๆ:** Decision Tree = ต้นไม้ตัดสินใจ อ่านง่าย แต่แม่นน้อยกว่าโมเดลรวมต้นไม้หลายต้น
+**ความรู้สั้น ๆ:** Decision Tree คือต้นไม้ตัดสินใจ อ่านง่าย แต่โดยทั่วไปแม่นน้อยกว่าโมเดลรวมต้นไม้หลายต้น
 
-**โค้ดนี้ทำอะไร:** ฝึก `DecisionTreeClassifier` แล้วบันทึกเมตริก + โมเดลลง MLflow"""
+**โค้ดนี้ทำอะไร:** ฝึก `DecisionTreeClassifier` แล้วบันทึกเมตริกและโมเดลลง MLflow"""
             ),
             code_cell(
                 r'''from sklearn.tree import DecisionTreeClassifier
@@ -706,12 +704,12 @@ else:
     evaluate(dt_model, "Run 1 Decision Tree")'''
             ),
             md_cell(
-                """### ขั้นตอนที่ 4: Champion — Random Forest
+                """### ขั้นตอนที่ 4: โมเดลที่เลือกใช้ — Random Forest
 
-**ความรู้สั้น ๆ:** Random Forest = รวม Decision Tree หลายต้น ลด overfitting มักได้ AUC สูงกว่า
+**ความรู้สั้น ๆ:** Random Forest รวม Decision Tree หลายต้น ช่วยลด overfitting และมักได้ AUC สูงกว่า
 
 เซลล์นี้ยังบันทึก **Confusion Matrix** เป็น artifact ใน Experiment  
-(แถวจริง × คอลัมน์ที่โมเดลทาย — ดูว่าทาย Churn ผิดตรงไหน)"""
+(แถวคือค่าจริง คอลัมน์คือที่โมเดลทาย — ใช้ดูว่าทาย Churn ผิดตรงไหน)"""
             ),
             code_cell(
                 r'''from sklearn.ensemble import RandomForestClassifier
@@ -745,12 +743,12 @@ else:
     evaluate(rf_model, "Run 2 Random Forest")'''
             ),
             md_cell(
-                """### ขั้นตอนที่ 5: ลงทะเบียนโมเดลชนะ
+                """### ขั้นตอนที่ 5: ลงทะเบียนโมเดลที่ชนะ
 
 **โค้ดนี้ทำอะไร:** เลือก run ที่ AUC สูงสุด แล้ว `register_model` เป็น `freshmart-churn-model`
 
-หลังจากนี้ไป Workspace ควรเห็น item ประเภท **Model**  
-Lab 4 จะเรียกโมเดลนี้ด้วยชื่อ + version 1"""
+หลังจากนี้ไป Workspace ควรเห็นรายการประเภท **Model**  
+Lab 4 จะเรียกโมเดลนี้ด้วยชื่อและ version 1"""
             ),
             code_cell(
                 r'''dt_auc = roc_auc_score(y_test, dt_model.predict_proba(X_test)[:, 1])
@@ -782,20 +780,21 @@ print("Lab 3 verification passed")'''
                 """# FreshMart Lab 4: Batch Scoring to Gold
 **Microsoft Fabric Data Science**
 
-เป้าหมาย: ทำนายสมาชิกใหม่ 200 คน → ตาราง `gold.freshmart_predictions` พร้อมความเร่งด่วนแคมเปญ
+การทำนายเป็นชุด (batch scoring) คือทำนายหลายแถวตามรอบ ไม่ใช่ทีละคำขอทันที  
+เป้าหมาย: ทำนายสมาชิกใหม่ 200 คน แล้วเขียนตาราง `gold.freshmart_predictions` พร้อมความเร่งด่วนแคมเปญ
 
 ### กฎทอง (ถามบ่อยที่สุด — อ่านก่อนรัน)
 **ห้าม** คำนวณ min/max ใหม่จากชุด 200 คน  
 **ต้อง** ใช้ `feature_params.json` จาก Lab 2
 
-ถ้า scale ใหม่ → ผลทำนายเพี้ยน / เอียงคลาสเดียว
+ถ้า scale ใหม่ ผลทำนายจะเพี้ยนหรือเอียงไปคลาสเดียว
 
 ### ถ้าติด — อ่านก่อนถาม TA
 | อาการ | สาเหตุที่พบบ่อย | ทำอะไร |
 | --- | --- | --- |
 | หาโมเดลไม่เจอ | ยังไม่จบ Lab 3 | กลับไป register `freshmart-churn-model` |
-| missing column / type mismatch | ลำดับฟีเจอร์ไม่ตรง | ใช้ params จาก Lab 2 เท่านั้น |
-| PREDICT unavailable | สภาพแวดล้อม | เซลล์มี fallback — ดูข้อความใน output |"""
+| missing column / type mismatch | ลำดับฟีเจอร์ไม่ตรงลายเซ็น | ใช้ params จาก Lab 2 เท่านั้น |
+| PREDICT unavailable | สภาพแวดล้อม | เซลล์มีทางเลือกสำรอง — ดูข้อความใน output |"""
             ),
             md_cell("### เตรียม loader + ฟังก์ชันฟีเจอร์"),
             code_cell("import json\nfrom pathlib import Path\nimport pandas as pd\n\n" + LOADER),
@@ -809,7 +808,7 @@ print("Lab 3 verification passed")'''
 **โค้ดนี้ทำอะไร**
 1. อ่าน `Files/raw/freshmart_scoring_batch.csv` (200 แถว **ไม่มี** คอลัมน์ Churn)
 2. โหลด `feature_params.json` จาก Lab 2
-3. `transform_customers(..., require_target=False)` ให้ได้ 14 ฟีเจอร์ตาม signature
+3. `transform_customers(..., require_target=False)` ให้ได้ 14 ฟีเจอร์ตามลายเซ็นโมเดล
 
 รหัสลูกค้าชุดนี้ขึ้นต้น `CUST_05xxx` ไม่ซ้อนกับชุดฝึก"""
             ),
@@ -850,10 +849,9 @@ print(spark_features.head())'''
             md_cell(
                 """### ขั้นตอนที่ 2: PREDICT
 
-**ความรู้สั้น ๆ:** `MLFlowTransformer` = ให้ Spark เรียกโมเดลที่ลงทะเบียนไว้ทีละแถว/แบตช์
+**ความรู้สั้น ๆ:** `MLFlowTransformer` ให้ Spark เรียกโมเดลที่ลงทะเบียนไว้เพื่อทำนายหลายแถวพร้อมกัน (การทำนายเป็นชุด)
 
-ส่งเฉพาะคอลัมน์ฟีเจอร์ — **อย่าส่ง** `CustomerID`
-
+ส่งเฉพาะคอลัมน์ฟีเจอร์ — **อย่าส่ง** `CustomerID`  
 ถ้า PREDICT ไม่พร้อม เซลล์จะลอง `mlflow.pyfunc` ต่ออัตโนมัติ"""
             ),
             code_cell(
@@ -897,11 +895,11 @@ print(predictions[["CustomerID", "RecencyDays", "MonetaryTotal", "ComplaintCount
                 """### ขั้นตอนที่ 3: เขียนตาราง Gold + ความเร่งด่วนแคมเปญ
 
 **โค้ดนี้ทำอะไร**
-- เพิ่ม `Action_Priority`: `1` → High (ส่ง voucher), `0` → Normal
-- เขียน Delta table `gold.freshmart_predictions`
+- เพิ่ม `Action_Priority`: ค่าทำนาย `1` เป็น High (ส่ง voucher), ค่า `0` เป็น Normal
+- เขียนตาราง Delta ชื่อ `gold.freshmart_predictions`
 
-**ต้องเห็น:** 200 แถว และมีทั้งสองกลุ่มความเร่งด่วน  
-(ชุดอ้างอิงท้องถิ่น ≈ 36 High / 164 Normal — บน Fabric อาจขยับเล็กน้อย)
+**สิ่งที่ควรเห็น:** 200 แถว และมีทั้งสองกลุ่มความเร่งด่วน  
+(ชุดอ้างอิงท้องถิ่นประมาณ 36 High / 164 Normal — บน Fabric อาจขยับเล็กน้อย)
 
 จบแล็บเมื่อพิมพ์ `Lab 4 verification passed`"""
             ),
