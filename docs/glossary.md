@@ -28,16 +28,21 @@
 
 ## Medallion (Bronze / Silver / Gold)
 
-ชั้นคุณภาพข้อมูลสามชั้น:
+ชั้นคุณภาพข้อมูลสามชั้น — แต่ละชั้นเป็น**สัญญา**ว่าข้อมูลนั้นเชื่อถือได้แค่ไหน:
 
 1. **Bronze** — ข้อมูลดิบใกล้แหล่ง เช่น `bronze.customers`
 2. **Silver** — สะอาดและมีฟีเจอร์พร้อมวิเคราะห์ เช่น `silver.customer_features`
 3. **Gold** — พร้อมใช้ธุรกิจ/รายงาน เช่น `gold.freshmart_predictions`
 
+ในแล็บนี้ชื่อชั้นคือชื่อ **schema** ของ lakehouse เดียวกัน ไม่ใช่แค่คำนำหน้าตาราง  
+ในองค์กรอาจแยก lakehouse ต่อชั้นได้ — สัญญาคุณภาพเหมือนกัน เส้นแบ่งทางกายภาพต่างกัน  
+ดูรายละเอียดใน [M01](01-fabric-architecture.md#ทำไมชื่อ-schema-สำคัญต่อ-medallion)
+
 ## schema.table
 
 ชื่อตารางแบบมี schema เช่น `bronze.transactions` หมายถึงตาราง `transactions` ใน schema ชื่อ `bronze`  
-เป็นมาตรฐานของ Lakehouse ที่มี schema ในชุดแล็บนี้
+ในชุดแล็บนี้ schema `bronze` / `silver` / `gold` คือชั้น [Medallion](#medallion-bronze--silver--gold)  
+ต้องเปิด **Lakehouse schemas** ตอนสร้าง lakehouse — เลือกได้ครั้งเดียว
 
 ## Notebook
 

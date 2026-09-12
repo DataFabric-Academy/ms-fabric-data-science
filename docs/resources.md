@@ -23,6 +23,8 @@ https://learn.microsoft.com/training/paths/implement-data-science-machine-learni
 | Fabric Trial 60 วัน | https://learn.microsoft.com/fabric/fundamentals/fabric-trial |
 | สร้าง workspace | https://learn.microsoft.com/fabric/fundamentals/create-workspaces |
 | สร้าง lakehouse (เปิด schemas) | https://learn.microsoft.com/fabric/data-engineering/create-lakehouse |
+| Lakehouse schemas | https://learn.microsoft.com/fabric/data-engineering/lakehouse-schemas |
+| Medallion บน OneLake | https://learn.microsoft.com/fabric/onelake/onelake-medallion-lakehouse-architecture |
 
 ## เอกสารผลิตภัณฑ์ Fabric (เชิงลึก)
 

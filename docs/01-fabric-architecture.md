@@ -55,6 +55,24 @@
 
 หลักการ: โมเดลอ่านจาก Silver (ฟีเจอร์ที่นิยามชัด) แล้วเขียนคะแนนไป Gold เพื่อให้รายงานธุรกิจใช้ — ไม่ฝึกโมเดลตรงจากไฟล์ดิบโดยไม่มีสัญญาข้อมูล
 
+### ทำไมชื่อ schema สำคัญต่อ Medallion
+
+Medallion คือ**สัญญาคุณภาพ**สามชั้น ไม่ใช่แค่คำนำหน้าชื่อตาราง  
+ในแล็บ FreshMart เราทำให้ชั้นนั้นเป็น **schema** ใน lakehouse เดียว `lh_freshmart` เพื่อให้ Spark และ SQL ชี้ตารางด้วยรูปแบบ `schema.table`
+
+| Schema | สัญญา | ใครเขียน / ใครอ่านในแล็บ |
+| --- | --- | --- |
+| `bronze` | ใกล้ไฟล์ดิบ ยังไม่ล็อกฟีเจอร์ | Lab 0 เขียน · Lab 1 อ่าน |
+| `silver` | สะอาดและล็อกคอลัมน์อินพุตของโมเดล | Lab 2 เขียน · Lab 3 อ่าน |
+| `gold` | พร้อมแคมเปญหรือรายงาน | Lab 4 เขียน |
+
+ชื่อ schema จึงบอกว่าตารางอยู่ในสัญญาชั้นไหน — `bronze.transactions` กับ `gold.freshmart_predictions` คนละชั้นอย่างชัดเจน  
+อย่าสับสนกับ `Files/raw/` — นั่นคือโซนลงจอดไฟล์ ยังไม่ใช่ตาราง Bronze จนกว่าจะเขียนเป็น Delta ใน schema `bronze`
+
+ในองค์กร Microsoft แนะนำให้แยก **lakehouse ต่อชั้น** ได้เมื่อต้องการขอบเขตสิทธิ์หรือทีมชัดเจน — สัญญา Bronze / Silver / Gold เหมือนกัน แค่เส้นแบ่งทางกายภาพต่างกัน  
+ชุดนี้ใช้ schema ใน lakehouse เดียวเพราะผู้เรียนคนเดียวทำครบวงจรบน Trial ของตนเอง  
+อ้างอิง: [Understand medallion architecture for Fabric with OneLake](https://learn.microsoft.com/fabric/onelake/onelake-medallion-lakehouse-architecture) · [Lakehouse schemas](https://learn.microsoft.com/fabric/data-engineering/lakehouse-schemas)
+
 ## ความเข้าใจผิดที่พบบ่อย
 
 | ความเข้าใจผิด | ความจริง |
@@ -63,12 +81,14 @@
 | ต้องมีคลัสเตอร์ Spark ของตัวเองตลอดเวลา | Spark ถูกจัดการใน Fabric ตาม session หรืองานที่รัน |
 | งานวิทยาศาสตร์ข้อมูลต้องย้ายข้อมูลออกไป Azure Machine Learning เสมอ | ฝึก ติดตาม และทำนายเป็นชุดได้ใน Fabric ด้วย MLflow และ PREDICT |
 | Lakehouse กับ Warehouse ใช้แทนกันได้ทุกงาน | Lakehouse เหมาะ Spark และการเรียนรู้ของเครื่อง; Warehouse เหมาะงาน SQL เชิงสัมพันธ์เข้มข้น |
+| Medallion คือการเติม `bronze_` หน้าชื่อตาราง | ในชุดนี้ชั้นคือ **schema** เช่น `bronze.transactions` — คำนำหน้าแบนไม่ใช่ชั้น |
 
 ## คำถามทบทวน
 
 1. ประโยชน์หลักของ Fabric ในโครงการองค์กรคืออะไร — ใช้ตอบจากหัวข้อ “ทำไมต้องแพลตฟอร์มเดียว”  
 2. Spark, T-SQL และ Power BI เข้าถึงข้อมูลบน OneLake อย่างไร — คิดถึงแนวอ่านสำเนาเดียว  
 3. ถ้าต้องนำเข้าข้อมูลจากระบบ ERP ภายนอกเข้า Lakehouse ควรเริ่มที่กลุ่มงานใด — ดูตาราง workload  
+4. ทำไม Lab 0 ต้องเปิด **Lakehouse schemas** ตอนสร้าง — คิดถึงชื่อชั้น Medallion และรูปแบบ `schema.table`  
 
 ## เชื่อมแล็บ
 

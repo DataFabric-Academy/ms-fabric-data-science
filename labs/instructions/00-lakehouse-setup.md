@@ -3,7 +3,7 @@
 ในแล็บนี้คุณจะลงทะเบียน Fabric Trial ของตนเอง สร้าง workspace และ lakehouse ของตนเอง อัปโหลดไฟล์ FreshMart แล้วสร้างตาราง Bronze จากนั้นนำเข้า notebook เพื่อยืนยันว่าพร้อมสำรวจข้อมูลใน Lab 1
 
 แล็บนี้ใช้เวลาประมาณ **30–40** นาที  
-ศัพท์ที่เกี่ยวข้อง: [Lakehouse](../../docs/glossary.md#lakehouse) · [จุดตรวจ](../../docs/glossary.md#จุดตรวจ-verification) · [Churn](../../docs/glossary.md#churn)
+ศัพท์ที่เกี่ยวข้อง: [Lakehouse](../../docs/glossary.md#lakehouse) · [Medallion](../../docs/glossary.md#medallion-bronze--silver--gold) · [schema.table](../../docs/glossary.md#schematable) · [จุดตรวจ](../../docs/glossary.md#จุดตรวจ-verification) · [Churn](../../docs/glossary.md#churn)
 
 > **กติกาห้องเรียน:** แต่ละคนใช้ Fabric Trial และ workspace ของตนเอง  
 > **อย่าเชิญ** ผู้เรียนคนอื่นหรือผู้สอนเข้า workspace — ไม่มี workspace ร่วมในคอร์สนี้
@@ -39,8 +39,15 @@
 
 1. ใน workspace กด **+ New item** แล้วเลือก **Lakehouse**
 2. ตั้งชื่อ **`lh_freshmart`**
-3. เหลือช่อง **Lakehouse schemas** เปิดไว้ (ค่าเริ่มต้น) — ใช้จัดตารางเป็น `bronze.transactions` ได้
+3. เหลือช่อง **Lakehouse schemas** เปิดไว้ (ค่าเริ่มต้น) — อย่าปิด
 4. กด **Create**
+
+> **ทำไมชื่อ schema สำคัญ:** ในแล็บนี้ชั้น Medallion คือ**ชื่อ schema** ของ lakehouse เดียวกัน  
+> ตารางจึงเรียกว่า `bronze.transactions` ไม่ใช่ `bronze_transactions`  
+> `bronze` / `silver` / `gold` บอกสัญญาคุณภาพ ไม่ใช่แค่จัดกลุ่มใน Explorer — Lab 0 เขียน Bronze, Lab 2 เขียน Silver, Lab 4 เขียน Gold  
+> `Files/raw/` เป็นโซนลงจอดไฟล์ CSV ยังไม่ใช่ตารางชั้น Bronze จนกว่า notebook จะเขียนเป็น Delta ใน schema `bronze`  
+> เลือกเปิด schemas ได้ครั้งเดียวตอนสร้าง lakehouse  
+> อธิบายเพิ่ม: [Medallion ใน M01](../../docs/01-fabric-architecture.md#ทำไมชื่อ-schema-สำคัญต่อ-medallion) · [glossary](../../docs/glossary.md#medallion-bronze--silver--gold)
 5. เปิด **Files** แล้วสร้างโฟลเดอร์ `raw`
 6. อัปโหลด 3 ไฟล์จากเครื่อง (หลัง `git clone` repository นี้ ไฟล์อยู่ที่ `labs/data/`):
    - `freshmart_transactions.csv` — ธุรกรรมขายและของเสีย
