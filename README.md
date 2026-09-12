@@ -1,6 +1,6 @@
 # Microsoft Fabric Data Science — FreshMart Labs
 
-repository ชุดปฏิบัติการ Data Science บน Microsoft Fabric ใช้กรณีศึกษา **FreshMart Customer Churn**  
+Repository ชุดปฏิบัติการ Data Science บน Microsoft Fabric ใช้กรณีศึกษา **FreshMart Customer Churn**  
 กลุ่มเป้าหมาย: **Analyst ที่อยากเข้าใจ Data Science**
 
 เริ่มที่ [labs/README.md](labs/README.md)
