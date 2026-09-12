@@ -59,7 +59,7 @@ ORDER BY TotalWasteCost DESC;
 
 ## นำเข้า notebook และรันจุดตรวจ
 
-1. บนเครื่องรัน `git clone` รีโปคอร์สนี้ (ถ้ายังไม่ได้)
+1. บนเครื่องรัน `git clone` repository คอร์สนี้ (ถ้ายังไม่ได้)
 2. ใน Workspace กด **+ New item** → **Notebook** → **Create**
 3. ใน Notebook: **File / … → Import notebook / Upload**
 4. เลือก `labs/notebooks/00-environment-verification.ipynb` จากเครื่อง

@@ -13,7 +13,7 @@ Portal: https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07
 - [ ] เปิด workspace **`labs`**
 - [ ] เปิด Lakehouse **`lh_freshmart`** แล้ว Refresh `Tables` / `Files`
 - [ ] เห็นตาราง `bronze_transactions`, `bronze_customers`
-- [ ] บนเครื่อง: `git clone` รีโปนี้
+- [ ] บนเครื่อง: `git clone` repository นี้
 - [ ] ใน Fabric: สร้าง Notebook → **Import / Upload** จาก `labs/notebooks/` บนเครื่อง
 - [ ] ในแต่ละ Notebook: แนบ Default Lakehouse = **`lh_freshmart`**
 - [ ] รอ Spark/kernel พร้อม (รอบแรก 1–2 นาทีได้)

@@ -5,7 +5,7 @@
 
 ## เส้นทางผู้เรียน
 
-1. `git clone` รีโปนี้
+1. `git clone` repository นี้
 2. เปิด workspace **`labs`** บน Fabric
 3. Import notebook จาก `labs/notebooks/`
 4. แนบ Default Lakehouse = **`lh_freshmart`**
