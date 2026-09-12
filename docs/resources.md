@@ -14,6 +14,16 @@ https://learn.microsoft.com/training/paths/implement-data-science-machine-learni
 | Train and track models with MLflow | https://learn.microsoft.com/training/modules/train-track-model-fabric/ |
 | Generate batch predictions | https://learn.microsoft.com/training/modules/generate-batch-predictions-fabric/ |
 
+## สภาพแวดล้อมแล็บ (ผู้เรียนสร้างเอง)
+
+แต่ละคนลงทะเบียน Trial และสร้าง workspace ของตนเอง — ไม่เชิญใครเข้า
+
+| หัวข้อ | URL |
+| --- | --- |
+| Fabric Trial 60 วัน | https://learn.microsoft.com/fabric/fundamentals/fabric-trial |
+| สร้าง workspace | https://learn.microsoft.com/fabric/fundamentals/create-workspaces |
+| สร้าง lakehouse (เปิด schemas) | https://learn.microsoft.com/fabric/data-engineering/create-lakehouse |
+
 ## เอกสารผลิตภัณฑ์ Fabric (เชิงลึก)
 
 | หัวข้อ | URL |

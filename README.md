@@ -10,7 +10,7 @@ Repository ชุดปฏิบัติการวิทยาศาสตร
 | อภิธานศัพท์ | [docs/glossary.md](docs/glossary.md) |
 | Labs มือบน | [labs/README.md](labs/README.md) |
 
-เส้นทางผู้เรียน: อ่าน [docs](docs/README.md) ตามโมดูล จากนั้น `git clone` repository นี้ นำเข้า notebook จาก `labs/notebooks/` และแนบ lakehouse `lh_freshmart` ใน workspace **`labs`**
+เส้นทางผู้เรียน: อ่าน [docs](docs/README.md) ตามโมดูล จากนั้นลงทะเบียน Fabric Trial ของตนเอง สร้าง workspace ของตนเอง (แนะนำชื่อ `labs`) — **ไม่เชิญใครเข้า** — แล้ว `git clone` repository นี้ นำเข้า notebook จาก `labs/notebooks/` และแนบ lakehouse `lh_freshmart` ที่สร้างเอง
 
 ## ตรวจว่าแล็บใช้งานได้จริง
 

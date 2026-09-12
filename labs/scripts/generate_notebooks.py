@@ -159,20 +159,21 @@ def build() -> None:
 เป้าหมาย: ยืนยันว่าพร้อมเข้า Lab 1 — **ไม่ต้องวิเคราะห์ธุรกิจในแล็บนี้**
 
 ### ก่อนรัน (เช็ก 30 วินาที)
-1. Workspace = `labs`
-2. แนบ Default Lakehouse = **`lh_freshmart`** (ซ้ายมือของ notebook)
-3. รอ Spark ขึ้น Ready (รอบแรก 1–2 นาทีได้ — **อย่ารันหลายเซลล์ซ้อน**)
+1. Workspace = ของคุณเอง (แนะนำชื่อ `labs`) — **ไม่ใช้ workspace ร่วม และไม่เชิญใครเข้า**
+2. แนบ Default Lakehouse = **`lh_freshmart`** ที่สร้างเอง (ซ้ายมือของ notebook)
+3. อัปโหลดไฟล์จาก `labs/data/` ไปที่ `Files/raw/` แล้ว
+4. รอ Spark ขึ้น Ready (รอบแรก 1–2 นาทีได้ — **อย่ารันหลายเซลล์ซ้อน**)
 
 ### ศัพท์ที่ใช้ในแล็บนี้
-Lakehouse คือที่เก็บไฟล์และตารางใน OneLake ชั้น Bronze คือข้อมูลดิบที่ผู้สอนเตรียมไว้ เช่นตาราง `bronze.transactions`  
+Lakehouse คือที่เก็บไฟล์และตารางใน OneLake ชั้น Bronze คือข้อมูลดิบที่คุณสร้างจาก CSV ในแล็บนี้ เช่นตาราง `bronze.transactions`  
 อธิบายเพิ่ม: ดูอภิธานศัพท์ใน repository ที่ `docs/glossary.md`
 
 ### ถ้าติด — อ่านก่อนถาม TA
 | อาการ | ทำอะไร |
 | --- | --- |
-| `Spark table unavailable` แล้วโหลด CSV | **ปกติ** ถ้ายังเห็นแถวครบ (ทางเลือกสำรองอ่านไฟล์ดิบ) |
+| `Spark table unavailable` แล้วโหลด CSV | กลับไปรันเซลล์สร้างตาราง Bronze ก่อน — ถ้ายังเห็นแถวครบ จึงผ่านจุดตรวจได้ |
 | Kernel / Spark Starting ค้าง | รอ แล้วรันเซลล์เดิมอีกครั้งทีละเซลล์ |
-| ไม่เจอไฟล์/ตาราง | แจ้งผู้สอน — อย่าสร้าง lakehouse เอง |
+| ไม่เจอไฟล์ใน `Files/raw/` | อัปโหลดสามไฟล์จาก `labs/data/` ตามคู่มือ Lab 0 — ไม่ต้องขอเข้า workspace ของผู้สอน |
 | AssertionError จำนวนแถว | ไม่ผ่าน Lab 0 — อย่าข้ามไป Lab 1 |"""
             ),
             md_cell(
@@ -185,6 +186,59 @@ Lakehouse คือที่เก็บไฟล์และตารางใ�
 - ไม่ต้องแก้โค้ดนี้"""
             ),
             code_cell(LOADER),
+            md_cell(
+                """### สร้างตาราง Bronze จากไฟล์ดิบ
+
+**โค้ดนี้ทำอะไร:** สร้าง schema `bronze` / `silver` / `gold` แล้วเขียนตาราง `bronze.transactions` และ `bronze.customers` จาก `Files/raw/`
+
+รันครั้งเดียวหลังอัปโหลด CSV — รันซ้ำได้ (เขียนทับตาราง Bronze ชุดเดิม)
+
+**สิ่งที่ควรเห็น**
+- `bronze.transactions` ประมาณ **3,000** แถว
+- `bronze.customers` ประมาณ **1,500** แถว
+- ข้อความ `Bronze tables ready`"""
+            ),
+            code_cell(
+                """from pathlib import Path
+
+RAW = Path("/lakehouse/default/Files/raw")
+required = [
+    "freshmart_transactions.csv",
+    "freshmart_customers.csv",
+    "freshmart_scoring_batch.csv",
+]
+missing = [name for name in required if not (RAW / name).exists()]
+if missing:
+    raise FileNotFoundError(
+        "ไม่พบไฟล์ใน Files/raw/: "
+        + ", ".join(missing)
+        + " — อัปโหลดจาก labs/data/ ตามคู่มือ Lab 0"
+    )
+
+spark.sql("CREATE SCHEMA IF NOT EXISTS bronze")
+spark.sql("CREATE SCHEMA IF NOT EXISTS silver")
+spark.sql("CREATE SCHEMA IF NOT EXISTS gold")
+
+
+def load_raw_csv(file_name: str):
+    return (
+        spark.read.option("header", True)
+        .option("inferSchema", True)
+        .csv(f"Files/raw/{file_name}")
+    )
+
+
+load_raw_csv("freshmart_transactions.csv").write.mode("overwrite").saveAsTable(
+    "bronze.transactions"
+)
+load_raw_csv("freshmart_customers.csv").write.mode("overwrite").saveAsTable(
+    "bronze.customers"
+)
+
+print("bronze.transactions:", spark.table("bronze.transactions").count())
+print("bronze.customers:", spark.table("bronze.customers").count())
+print("Bronze tables ready")"""
+            ),
             md_cell(
                 """### โหลด Bronze แล้วดูตัวอย่างแถว
 

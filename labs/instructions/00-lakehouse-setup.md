@@ -1,40 +1,73 @@
-# Lab 0: เปิด Workspace และยืนยัน Lakehouse FreshMart
+# Lab 0: สร้าง Workspace ของตนเอง และเตรียม Lakehouse FreshMart
 
-ในแล็บนี้คุณจะเปิดที่เก็บข้อมูล FreshMart ที่เตรียมไว้แล้ว ตรวจไฟล์ดิบและตาราง Bronze แล้วนำเข้า notebook จากเครื่องเพื่อยืนยันว่าพร้อมสำรวจข้อมูลใน Lab 1
+ในแล็บนี้คุณจะลงทะเบียน Fabric Trial ของตนเอง สร้าง workspace และ lakehouse ของตนเอง อัปโหลดไฟล์ FreshMart แล้วสร้างตาราง Bronze จากนั้นนำเข้า notebook เพื่อยืนยันว่าพร้อมสำรวจข้อมูลใน Lab 1
 
-แล็บนี้ใช้เวลาประมาณ **20** นาที  
+แล็บนี้ใช้เวลาประมาณ **30–40** นาที  
 ศัพท์ที่เกี่ยวข้อง: [Lakehouse](../../docs/glossary.md#lakehouse) · [จุดตรวจ](../../docs/glossary.md#จุดตรวจ-verification) · [Churn](../../docs/glossary.md#churn)
 
-## สร้าง / เปิด workspace
+> **กติกาห้องเรียน:** แต่ละคนใช้ Fabric Trial และ workspace ของตนเอง  
+> **อย่าเชิญ** ผู้เรียนคนอื่นหรือผู้สอนเข้า workspace — ไม่มี workspace ร่วมในคอร์สนี้
 
-> ต้องใช้ Fabric Trial, Premium หรือ Fabric capacity — ไม่ใช่ Personal  
-> ดู [Fabric trial](https://aka.ms/fabrictrial)
+## ลงทะเบียน Fabric Trial
 
-1. เปิด [Microsoft Fabric](https://app.fabric.microsoft.com/home?experience=fabric) แล้วลงชื่อเข้าใช้
-2. ซ้ายมือเลือก **Workspaces**
-3. เปิด workspace **`labs`** ที่ผู้สอนเชิญไว้แล้ว  
-   (ถ้าคอร์สให้สร้างเอง ให้ตั้งชื่อตามที่ผู้สอนกำหนด และเลือก license ที่มี Fabric capacity)
-4. มุมล่างซ้ายสลับประสบการณ์เป็น **Data Science** ถ้ายังไม่ใช่
+ต้องใช้ Fabric Trial (หรือ Capacity ที่รองรับ Fabric) — ไม่ใช่ Personal / My workspace ที่ยังเป็น Power BI อย่างเดียว  
+ดู [Try Microsoft Fabric for free](https://learn.microsoft.com/fabric/fundamentals/fabric-trial) และทางลัด [aka.ms/fabrictrial](https://aka.ms/fabrictrial)
 
-**สิ่งที่ควรเห็น:** ใน workspace มี Lakehouse ชื่อ `lh_freshmart`
+1. เปิด [Microsoft Fabric](https://app.fabric.microsoft.com/home?experience=fabric) แล้วลงชื่อเข้าใช้ด้วยบัญชีของตนเอง
+2. มุมขวาบนเปิด **Account manager** (รูปโปรไฟล์)
+3. กด **Start trial** แล้วยอมรับเงื่อนไขเพื่อเปิด Trial 60 วัน  
+   (ถ้าเห็น **Trial status** อยู่แล้ว ข้ามขั้นนี้ได้)
+4. ถ้าบัญชียังไม่มีสิทธิ์ Power BI ให้เปิด [app.fabric.microsoft.com](https://app.fabric.microsoft.com) เพื่อรับ Fabric (Free) ก่อน แล้วค่อยเริ่ม Trial
 
-> ชุดนี้ใช้ workspace ร่วมเพื่อให้ทุกคนได้ข้อมูล FreshMart ชุดเดียวกัน และเริ่มสำรวจข้อมูลใน Lab 1 ได้ทันที
+**สิ่งที่ควรเห็น:** Account manager แสดงสถานะ Trial และจำนวนวันที่เหลือ
 
-## ตรวจไฟล์ดิบใน Lakehouse
+ถ้าไม่เห็นปุ่ม **Start trial**: ผู้ดูแล tenant อาจปิด Trial หรือโควตา Trial ขององค์กรเต็ม — ลองสร้างรายการ Fabric ใน workspace ของตนเองตาม [วิธีที่ 2 ของเอกสาร Trial](https://learn.microsoft.com/fabric/fundamentals/fabric-trial#method-2-trigger-a-fabric-trial-by-trying-to-use-a-fabric-feature) หรือแจ้งผู้สอนให้ช่วยดู tenant setting (ไม่ใช่ขอเข้า workspace ของใคร)
 
-1. เปิด `lh_freshmart`
-2. ซ้ายมือเปิด **Files** แล้วเข้าโฟลเดอร์ `raw`
-3. ต้องเห็นครบ 3 ไฟล์:
+## สร้าง workspace ของตนเอง
+
+1. ซ้ายมือเลือก **Workspaces** แล้วกด **+ New workspace**
+2. ตั้งชื่อ **`labs`** (หรือ `labs-<ชื่อย่อ>` ถ้าชื่อซ้ำใน tenant)
+3. ที่ **Advanced** เลือกประเภท workspace เป็น **Fabric Trial**
+4. กด **Apply**
+5. มุมล่างซ้ายสลับประสบการณ์เป็น **Data Science** ถ้ายังไม่ใช่
+
+**สิ่งที่ควรเห็น:** เปิดเข้า workspace ที่ว่าง และเป็นเจ้าของคนเดียว — ไม่ต้องรอคำเชิญจากผู้สอน
+
+อ้างอิง: [Create a workspace](https://learn.microsoft.com/fabric/fundamentals/create-workspaces)
+
+## สร้าง Lakehouse และอัปโหลดไฟล์ดิบ
+
+1. ใน workspace กด **+ New item** แล้วเลือก **Lakehouse**
+2. ตั้งชื่อ **`lh_freshmart`**
+3. เหลือช่อง **Lakehouse schemas** เปิดไว้ (ค่าเริ่มต้น) — ใช้จัดตารางเป็น `bronze.transactions` ได้
+4. กด **Create**
+5. เปิด **Files** แล้วสร้างโฟลเดอร์ `raw`
+6. อัปโหลด 3 ไฟล์จากเครื่อง (หลัง `git clone` repository นี้ ไฟล์อยู่ที่ `labs/data/`):
    - `freshmart_transactions.csv` — ธุรกรรมขายและของเสีย
    - `freshmart_customers.csv` — สมาชิกและสถานะ Churn (เลิกซื้อหรือไม่)
    - `freshmart_scoring_batch.csv` — ชุดทำนายใน Lab 4 (ยังไม่มีคอลัมน์ Churn)
-4. เปิดพรีวิว `freshmart_transactions.csv` ได้
+7. เปิดพรีวิว `freshmart_transactions.csv` ได้
 
 **สิ่งที่ควรเห็น:** ใต้ `Files/raw/` มีไฟล์ครบทั้งสามชื่อด้านบน
 
-## ตรวจตาราง Bronze
+อ้างอิง: [Create a lakehouse](https://learn.microsoft.com/fabric/data-engineering/create-lakehouse)
 
-1. ที่ **Tables** กด **Refresh**
+## นำเข้า notebook แล้วสร้างตาราง Bronze
+
+1. ใน Workspace กด **+ New item** แล้วเลือก **Notebook** จากนั้น **Create**
+2. ใน Notebook: **File / …** แล้วเลือก **Import notebook / Upload**
+3. เลือก `labs/notebooks/00-environment-verification.ipynb` จากเครื่อง
+4. ตั้งชื่อ `00_FreshMart_Environment_Verification`
+5. ด้านซ้ายแนบ Default Lakehouse = **`lh_freshmart`**
+6. รอ Spark พร้อม (รอบแรกอาจ 1–2 นาที) แล้วรันทุกเซลล์ตามลำดับ — เซลล์สร้าง schema `bronze` / `silver` / `gold` และตาราง `bronze.transactions`, `bronze.customers` จากไฟล์ใน `Files/raw/`
+
+**สิ่งที่ควรเห็น:** เซลล์สร้างตารางพิมพ์จำนวนแถวประมาณ **3,000** และ **1,500** จากนั้นเซลล์สุดท้ายพิมพ์ `Lab 0 verification passed`
+
+Lab ถัดไปใช้วิธีเดียวกัน: Import จาก `labs/notebooks/` แล้วแนบ `lh_freshmart`
+
+## ตรวจตาราง Bronze บนหน้า Lakehouse
+
+1. เปิด `lh_freshmart` แล้วที่ **Tables** กด **Refresh**
 2. ต้องเห็น schema **`bronze`** และตาราง `transactions`, `customers`  
    (ชื่อเต็ม: `bronze.transactions`, `bronze.customers` — ดู [schema.table](../../docs/glossary.md#schematable))
 
@@ -59,32 +92,21 @@ ORDER BY TotalWasteCost DESC;
 
 ถ้า SQL ยังไม่เจอตาราง: Refresh ที่ Lakehouse รอ 1–2 นาที แล้วลองใหม่
 
-## นำเข้า notebook และรันจุดตรวจ
-
-1. บนเครื่องรัน `git clone` repository คอร์สนี้ (ถ้ายังไม่ได้)
-2. ใน Workspace กด **+ New item** แล้วเลือก **Notebook** จากนั้น **Create**
-3. ใน Notebook: **File / …** แล้วเลือก **Import notebook / Upload**
-4. เลือก `labs/notebooks/00-environment-verification.ipynb` จากเครื่อง
-5. ตั้งชื่อ `00_FreshMart_Environment_Verification`
-6. ด้านซ้ายแนบ Default Lakehouse = **`lh_freshmart`**
-7. รอ Spark พร้อม (รอบแรกอาจ 1–2 นาที) แล้วรันทุกเซลล์ตามลำดับ
-
-**สิ่งที่ควรเห็น:** เซลล์สุดท้ายพิมพ์ `Lab 0 verification passed`
-
-Lab ถัดไปใช้วิธีเดียวกัน: Import จาก `labs/notebooks/` แล้วแนบ `lh_freshmart`
-
 ## ผ่านแล็บเมื่อ
 
-- [ ] เปิด workspace `labs` ได้
-- [ ] เห็น `lh_freshmart`, ไฟล์ใน `Files/raw/`, และตาราง Bronze
-- [ ] SQL แสดง Bakery เป็นหมวดของเสียสูงสุด
+- [ ] ลงทะเบียน Fabric Trial ของตนเองแล้ว
+- [ ] สร้าง workspace ของตนเอง (แนะนำชื่อ `labs`) โดยไม่เชิญใครเข้า
+- [ ] สร้าง `lh_freshmart` แล้วอัปโหลดไฟล์ครบใน `Files/raw/`
+- [ ] มีตาราง Bronze และ SQL แสดง Bakery เป็นหมวดของเสียสูงสุด
 - [ ] Notebook รันผ่าน `Lab 0 verification passed`
 
 ## แก้ปัญหาบ่อย
 
 | อาการ | วิธีแก้ |
 | --- | --- |
-| หา workspace ไม่เจอ | ขอสิทธิ์เข้า `labs` จากผู้สอน |
-| License เป็น Personal | แจ้งผู้สอนให้สลับ Trial/Capacity |
+| ไม่เห็นปุ่ม Start trial | ลองสร้างรายการ Fabric เพื่อกระตุ้น Trial หรือให้ผู้สอนดู tenant setting — **อย่าขอเข้า workspace ของผู้อื่น** |
+| สร้าง Lakehouse ไม่ได้ | ตรวจว่า workspace อยู่บน **Fabric Trial** ไม่ใช่ Personal |
+| ไม่เจอไฟล์ใน `Files/raw/` | อัปโหลดสามไฟล์จาก `labs/data/` หลัง clone repository |
 | Import ไม่ขึ้น | เลือกไฟล์ `.ipynb` จาก `labs/notebooks/` หลัง clone |
 | Spark ค้าง Starting | รอ cold start แล้วรันเซลล์เดิมอีกครั้ง |
+| SQL ไม่เจอ `bronze.transactions` | รันเซลล์สร้างตารางใน notebook ให้จบ แล้ว Refresh ที่ Lakehouse |

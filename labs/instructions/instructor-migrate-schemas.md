@@ -1,7 +1,7 @@
-# Instructor: Migrate Lakehouse to bronze.* / silver.* / gold.*
+# อ้างอิง: Migrate Lakehouse เก่าไป bronze.* / silver.* / gold.*
 
-เอกสารนี้สำหรับ **instructor เท่านั้น** — ผู้เรียนยังทำ Lab 0–4 ทีละขั้นเหมือนเดิม  
-แค่ชื่อตารางเปลี่ยนจาก `bronze_transactions` เป็น `bronze.transactions`
+คลาสใหม่ไม่ต้องใช้เอกสารนี้ — ผู้เรียนแต่ละคนสร้าง lakehouse แบบมี schema เองใน Lab 0  
+ใช้เมื่อเจอ lakehouse เก่าที่ยังเป็นชื่อตารางแบบแบน เช่น `bronze_transactions` แทน `bronze.transactions`
 
 ## ทำไมต้องย้าย
 
@@ -24,11 +24,11 @@ Fabric skill (medallion) แนะนำ lakehouse แบบ schema-enabled:
 | Import notebook + แนบ `lh_freshmart` | เหมือนเดิม | ไม่มีขั้นเพิ่ม |
 | จุดตรวจ 3,000 / 1,500 / 200 | เหมือนเดิม | ไม่เปลี่ยน |
 
-Loader ใน notebook ยังลองชื่อเก่าเป็นทางเลือกสำรอง (fallback) ชั่วคราว — คลาสที่ยังไม่ migrate ก็รันได้
+Loader ใน notebook ยังลองชื่อเก่าเป็นทางเลือกสำรอง (fallback) ชั่วคราว — lakehouse ที่ยังไม่ migrate ก็รันได้
 
-## ขั้นตอน migrate (ครั้งเดียวต่อ workspace)
+## ขั้นตอน migrate (ครั้งเดียวต่อ workspace ของตนเอง)
 
-1. เปิด notebook ใน workspace `labs` แนบ `lh_freshmart`
+1. เปิด notebook ใน workspace ของตนเอง แนบ `lh_freshmart`
 2. วางแล้วรัน:
 
 ```python
@@ -79,7 +79,7 @@ SELECT COUNT(*) FROM gold.freshmart_predictions;
 
 ## Rollback
 
-ชื่อใหม่ยังไม่พร้อม → ให้ผู้เรียนใช้ notebook เวอร์ชันนี้ได้ เพราะ loader ลอง flat name เก่าอัตโนมัติ  
+ชื่อใหม่ยังไม่พร้อม → ใช้ notebook เวอร์ชันนี้ได้ เพราะ loader ลอง flat name เก่าอัตโนมัติ  
 หรือสร้างตาราง flat กลับจาก schema:
 
 ```sql

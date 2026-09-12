@@ -43,7 +43,7 @@
 
 1. อ่าน docs ของโมดูลนั้นให้จบ
 2. เปิดคู่มือใน `labs/instructions/`
-3. รัน notebook ใน `labs/notebooks/` บน workspace `labs` / lakehouse `lh_freshmart`
+3. รัน notebook ใน `labs/notebooks/` บน workspace ของตนเอง (แนะนำชื่อ `labs`) / lakehouse `lh_freshmart` ที่สร้างเอง — ไม่ใช้ workspace ร่วม
 4. ทบทวนคำถามท้ายบท หรือเปิด [glossary.md](glossary.md) เมื่อเจอศัพท์ใหม่
 
 เมื่อพร้อมลงมือทำจริง เริ่มที่ [labs/README.md](../labs/README.md)

@@ -11,29 +11,31 @@
 
 ## เส้นทางผู้เรียน
 
-1. `git clone` repository นี้
-2. เปิด workspace **`labs`** บน Fabric
-3. Import notebook จาก `labs/notebooks/`
-4. แนบ Default Lakehouse = **`lh_freshmart`**
-5. ทำตามคู่มือใน `labs/instructions/` — รันทีละขั้น ดูผล แล้วไปต่อ
+1. ลงทะเบียน [Fabric Trial](https://aka.ms/fabrictrial) ด้วยบัญชีของตนเอง
+2. `git clone` repository นี้
+3. สร้าง workspace ของตนเองบน Fabric (แนะนำชื่อ **`labs`**) — **อย่าเชิญใครเข้า**
+4. สร้าง Lakehouse **`lh_freshmart`** แล้วอัปโหลด CSV จาก `labs/data/` ตาม [Lab 0](instructions/00-lakehouse-setup.md)
+5. Import notebook จาก `labs/notebooks/` แล้วแนบ Default Lakehouse = **`lh_freshmart`**
+6. ทำตามคู่มือใน `labs/instructions/` — รันทีละขั้น ดูผล แล้วไปต่อ
 
-## Workspace ห้องเรียน
+## Workspace ของผู้เรียน
+
+แต่ละคนใช้ Trial และ workspace ของตนเอง ไม่มี workspace ร่วม และไม่มีคำเชิญเข้า workspace ของผู้อื่น
 
 | รายการ | ค่า |
 | --- | --- |
-| Workspace | `labs` |
-| Lakehouse | `lh_freshmart` |
-| Portal | [เปิด workspace labs](https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07a4ad) |
+| Capacity | Fabric Trial ของตนเอง (หรือ Capacity ที่รองรับ Fabric) |
+| Workspace | สร้างเอง แนะนำชื่อ `labs` |
+| Lakehouse | สร้างเอง ชื่อ `lh_freshmart` (เปิด Lakehouse schemas) |
+| ข้อมูลเริ่มต้น | อัปโหลด `labs/data/*.csv` ไปที่ `Files/raw/` แล้วรันเซลล์สร้างตาราง Bronze ใน Lab 0 |
 
-ผู้สอนเตรียมไว้แล้ว: ไฟล์ `Files/raw/*.csv` และตาราง Bronze (`bronze.transactions`, `bronze.customers`)
-
-ถ้า workspace ยังใช้ชื่อตารางแบบเดิม (เช่น `bronze_transactions`) ดู [instructions/instructor-migrate-schemas.md](instructions/instructor-migrate-schemas.md)
+ถ้ามี lakehouse เก่าที่ยังใช้ชื่อตารางแบบเดิม (เช่น `bronze_transactions`) ดู [instructions/instructor-migrate-schemas.md](instructions/instructor-migrate-schemas.md)
 
 ## ลำดับแล็บ
 
 | Lab | คู่มือ | Notebook | ผลลัพธ์ที่ควรได้ |
 | --- | --- | --- | --- |
-| 0 | [00-lakehouse-setup.md](instructions/00-lakehouse-setup.md) | `00-environment-verification.ipynb` | เปิด `labs` และ `lh_freshmart` ได้ และผ่านจุดตรวจอัตโนมัติ |
+| 0 | [00-lakehouse-setup.md](instructions/00-lakehouse-setup.md) | `00-environment-verification.ipynb` | สร้าง workspace ของตนเอง + `lh_freshmart` แล้วผ่านจุดตรวจอัตโนมัติ |
 | 1 | [01-explore-data.md](instructions/01-explore-data.md) | `01-explore-data.ipynb` | สำรวจของเสียและพฤติกรรมลูกค้าที่เลิกซื้อ (Churn) |
 | 2 | [02-preprocess-data-wrangler.md](instructions/02-preprocess-data-wrangler.md) | `02-preprocess-data-wrangler.ipynb` | ใช้ Data Wrangler และได้ `silver.customer_features` พร้อมไฟล์ params |
 | 3 | [03-train-track-mlflow.md](instructions/03-train-track-mlflow.md) | `03-train-track-mlflow.ipynb` | มี Experiment และโมเดล `freshmart-churn-model` |

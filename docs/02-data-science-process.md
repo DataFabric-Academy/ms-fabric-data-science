@@ -56,7 +56,7 @@
 
 ## Lab 0 (สรุปภารกิจ)
 
-- สร้างหรือเข้าถึง Workspace และ Lakehouse `lh_freshmart`
+- ลงทะเบียน Fabric Trial ของตนเอง แล้วสร้าง Workspace และ Lakehouse `lh_freshmart` ของตนเอง
 - ยืนยันไฟล์ดิบและตาราง Bronze พร้อมใช้
 - แนบ Lakehouse เป็นค่าเริ่มต้นของ Notebook
 

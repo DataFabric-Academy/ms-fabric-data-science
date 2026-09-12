@@ -1,7 +1,7 @@
 # Checklist รัน Lab 0–2 บน Fabric (ทีละเซลล์)
 
-ใช้คู่กับ workspace **`labs`** และ Lakehouse **`lh_freshmart`**  
-Portal: https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07a4ad
+ใช้คู่กับ workspace **ของตนเอง** (แนะนำชื่อ `labs`) และ Lakehouse **`lh_freshmart`** ที่สร้างเอง  
+แต่ละคนใช้ Fabric Trial ของตนเอง — **อย่าเชิญใครเข้า workspace**
 
 อภิธานศัพท์: [../../docs/glossary.md](../../docs/glossary.md)
 
@@ -12,12 +12,15 @@ Portal: https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07
 
 ## ก่อน Lab 0 (ทำครั้งเดียว)
 
-- [ ] เปิด workspace **`labs`**
-- [ ] เปิด Lakehouse **`lh_freshmart`** แล้ว Refresh `Tables` / `Files`
-- [ ] เห็นตาราง `bronze.transactions`, `bronze.customers`
+- [ ] ลงทะเบียน Fabric Trial ด้วยบัญชีของตนเอง
+- [ ] สร้าง workspace ของตนเอง (แนะนำชื่อ **`labs`**) แล้วเลือกประเภท **Fabric Trial**
+- [ ] สร้าง Lakehouse **`lh_freshmart`** (เปิด Lakehouse schemas)
 - [ ] บนเครื่อง: `git clone` repository นี้
+- [ ] อัปโหลด `labs/data/*.csv` ไปที่ `Files/raw/`
 - [ ] ใน Fabric: สร้าง Notebook แล้ว **Import / Upload** จาก `labs/notebooks/` บนเครื่อง
 - [ ] ในแต่ละ Notebook: แนบ Default Lakehouse = **`lh_freshmart`**
+- [ ] รันเซลล์สร้างตาราง Bronze แล้ว Refresh `Tables` / `Files`
+- [ ] เห็นตาราง `bronze.transactions`, `bronze.customers`
 - [ ] รอ Spark/kernel พร้อม (รอบแรก 1–2 นาทีได้)
 
 ---

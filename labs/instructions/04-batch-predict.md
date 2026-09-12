@@ -109,5 +109,4 @@ python labs/scripts/run_local_pipeline.py
 
 ## ล้างทรัพยากร (ทางเลือก)
 
-ถ้าใช้ workspace ส่วนตัวจบคอร์สแล้ว: **Workspace settings** แล้ว **Remove this workspace**  
-ถ้าเป็น workspace ร่วม `labs` — **อย่าลบ** ให้แจ้งผู้สอน
+จบคอร์สแล้วลบได้จาก **Workspace settings** แล้ว **Remove this workspace** — เป็น workspace ของคุณคนเดียว ไม่กระทบผู้เรียนคนอื่น

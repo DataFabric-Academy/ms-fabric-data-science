@@ -61,10 +61,10 @@ M07–M08 เป็นส่วนขยาย Instructor Edition (Copilot / Sem
 
 | รายการ | ค่าแนะนำ |
 | --- | --- |
-| Capacity | Fabric F2 ขึ้นไป หรือ Trial — โควตาประมวลผลที่ต้องมีก่อนรัน Spark |
-| สิทธิ์ Workspace | Contributor ขึ้นไป เพื่อสร้าง notebook และโมเดลได้ |
+| Capacity | Fabric Trial ของผู้เรียนแต่ละคน (หรือ F2 ขึ้นไป) — โควตาประมวลผลที่ต้องมีก่อนรัน Spark |
+| Workspace | สร้างเองใน Trial ของตนเอง เป็นเจ้าของคนเดียว — **ไม่เชิญผู้เรียนหรือผู้สอนเข้า** |
 | ทักษะ | Python / pandas / scikit-learn พื้นฐาน |
-| แล็บใน repo นี้ | Workspace `labs`, Lakehouse `lh_freshmart` |
+| แล็บใน repo นี้ | Workspace ของคุณ (แนะนำชื่อ `labs`), Lakehouse `lh_freshmart` ที่สร้างเอง |
 
 ## ระเบียบวิธีเรียนรู้ (จากสไลด์)
 
@@ -78,7 +78,7 @@ M07–M08 เป็นส่วนขยาย Instructor Edition (Copilot / Sem
 
 - ถามทันทีเมื่อแล็บติด
 - เชื่อมโจทย์ธุรกิจก่อนเขียนโค้ด
-- ทำงานคู่แก้ปัญหาด้วยกัน
+- ทำงานคู่แก้ปัญหาด้วยกัน (แต่ละคนรันบน workspace ของตนเอง — ไม่เชิญใครเข้า)
 
 ควรเลี่ยง:
 
