@@ -34,7 +34,8 @@
 ## ตรวจตาราง Bronze
 
 1. ที่ **Tables** กด **Refresh**
-2. ต้องเห็น `bronze_transactions` และ `bronze_customers`
+2. ต้องเห็น schema **`bronze`** และตาราง `transactions`, `customers`  
+   (ชื่อเต็ม: `bronze.transactions`, `bronze.customers`)
 
 **จุดตรวจ:** แถวประมาณ **3,000** และ **1,500**
 
@@ -48,7 +49,7 @@ SELECT
     Category,
     COUNT(*) AS TotalTransactions,
     SUM(WasteCost) AS TotalWasteCost
-FROM bronze_transactions
+FROM bronze.transactions
 GROUP BY Category
 ORDER BY TotalWasteCost DESC;
 ```

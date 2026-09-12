@@ -25,7 +25,7 @@
 รันเซลล์โหลด (หรือวางโค้ดนี้ถ้าสร้าง notebook เอง):
 
 ```python
-df = spark.read.table("bronze_transactions").toPandas()
+df = spark.read.table("bronze.transactions").toPandas()
 print(df.shape)
 df.head()
 ```
@@ -111,7 +111,7 @@ plt.show()
 ## สำรวจสมาชิกและ Churn
 
 ```python
-df_cust = spark.read.table("bronze_customers").toPandas()
+df_cust = spark.read.table("bronze.customers").toPandas()
 print("Number of customers:", df_cust.shape[0])
 print(df_cust["Churn"].value_counts(normalize=True))
 print("Age missing:", df_cust["Age"].isna().sum())

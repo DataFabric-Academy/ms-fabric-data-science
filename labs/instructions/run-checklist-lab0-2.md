@@ -12,7 +12,7 @@ Portal: https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07
 
 - [ ] เปิด workspace **`labs`**
 - [ ] เปิด Lakehouse **`lh_freshmart`** แล้ว Refresh `Tables` / `Files`
-- [ ] เห็นตาราง `bronze_transactions`, `bronze_customers`
+- [ ] เห็นตาราง `bronze.transactions`, `bronze.customers`
 - [ ] บนเครื่อง: `git clone` repository นี้
 - [ ] ใน Fabric: สร้าง Notebook → **Import / Upload** จาก `labs/notebooks/` บนเครื่อง
 - [ ] ในแต่ละ Notebook: แนบ Default Lakehouse = **`lh_freshmart`**
@@ -79,7 +79,7 @@ Portal: https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07
 
 - [ ] ได้ใช้ Wrangler แล้ว Add code กลับ notebook (ส่วน A)
 - [ ] `Lab 2 verification passed`
-- [ ] เห็น `silver_customer_features` (1,500 แถว)
+- [ ] เห็น `silver.customer_features` (1,500 แถว)
 - [ ] มี `Files/params/feature_params.json`
 
 ---
@@ -88,13 +88,13 @@ Portal: https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07
 
 | รายการ | ค่าที่ต้องได้ |
 | --- | --- |
-| bronze_transactions | 3,000 |
-| bronze_customers | 1,500 |
+| bronze.transactions | 3,000 |
+| bronze.customers | 1,500 |
 | DiscountRate ว่าง | ~89 |
 | Age ว่าง (ก่อน Lab 2) | 37 |
 | Churn rate | ~19.3% |
 | Age median (params) | 37.0 |
-| silver_customer_features | 1,500 |
+| silver.customer_features | 1,500 |
 | feature_params.json | มีใน `Files/params/` |
 
 พร้อมแล้วค่อยเปิด Lab 3 (`03_FreshMart_Model_Training_MLflow`)

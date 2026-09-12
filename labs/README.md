@@ -19,7 +19,9 @@
 | Lakehouse | `lh_freshmart` |
 | Portal | [เปิด workspace labs](https://app.fabric.microsoft.com/groups/56c1925e-a9e9-44ec-9834-b64b6b07a4ad) |
 
-Instructor provision ไว้แล้ว: `Files/raw/*.csv` และตาราง Bronze
+Instructor provision ไว้แล้ว: `Files/raw/*.csv` และตาราง Bronze (`bronze.transactions`, `bronze.customers`)
+
+Instructor ที่ยังใช้ชื่อตารางแบบ flat อยู่: ดู [instructions/instructor-migrate-schemas.md](instructions/instructor-migrate-schemas.md)
 
 ## ลำดับแล็บ
 
@@ -27,9 +29,9 @@ Instructor provision ไว้แล้ว: `Files/raw/*.csv` และตาร
 | --- | --- | --- | --- |
 | 0 | [00-lakehouse-setup.md](instructions/00-lakehouse-setup.md) | `00-environment-verification.ipynb` | เปิด `labs` + `lh_freshmart` + จุดตรวจผ่าน |
 | 1 | [01-explore-data.md](instructions/01-explore-data.md) | `01-explore-data.ipynb` | EDA ของเสีย + Churn |
-| 2 | [02-preprocess-data-wrangler.md](instructions/02-preprocess-data-wrangler.md) | `02-preprocess-data-wrangler.ipynb` | Wrangler + `silver_customer_features` + params |
+| 2 | [02-preprocess-data-wrangler.md](instructions/02-preprocess-data-wrangler.md) | `02-preprocess-data-wrangler.ipynb` | Wrangler + `silver.customer_features` + params |
 | 3 | [03-train-track-mlflow.md](instructions/03-train-track-mlflow.md) | `03-train-track-mlflow.ipynb` | Experiment + `freshmart-churn-model` |
-| 4 | [04-batch-predict.md](instructions/04-batch-predict.md) | `04-batch-predict.ipynb` | `gold_freshmart_predictions` |
+| 4 | [04-batch-predict.md](instructions/04-batch-predict.md) | `04-batch-predict.ipynb` | `gold.freshmart_predictions` |
 
 Checklist รัน UI Lab 0–2: [run-checklist-lab0-2.md](instructions/run-checklist-lab0-2.md)
 

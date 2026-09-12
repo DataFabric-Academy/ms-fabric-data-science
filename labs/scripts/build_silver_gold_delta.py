@@ -15,8 +15,8 @@ LOCAL = ROOT / "data" / ".local"
 OUT = LOCAL / "delta_upload"
 
 TABLES = {
-    "silver_customer_features": LOCAL / "silver_customer_features.csv",
-    "gold_freshmart_predictions": LOCAL / "gold_freshmart_predictions.csv",
+    "silver/customer_features": LOCAL / "silver_customer_features.csv",
+    "gold/freshmart_predictions": LOCAL / "gold_freshmart_predictions.csv",
 }
 
 
@@ -61,7 +61,7 @@ def write_delta(table: str, csv_path: Path) -> None:
     protocol = {"protocol": {"minReaderVersion": 1, "minWriterVersion": 2}}
     metadata = {
         "metaData": {
-            "id": f"freshmart-{table}",
+            "id": f"freshmart-{table.replace('/', '-')}",
             "format": {"provider": "parquet", "options": {}},
             "schemaString": json.dumps(
                 {"type": "struct", "fields": fields}, separators=(",", ":")

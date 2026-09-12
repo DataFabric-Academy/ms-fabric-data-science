@@ -28,7 +28,7 @@
 รันเซลล์โหลดธุรกรรมให้ได้ตัวแปร `df` (หรือวางโค้ด):
 
 ```python
-df = spark.read.table("bronze_transactions").toPandas()
+df = spark.read.table("bronze.transactions").toPandas()
 df = df.sample(n=500, random_state=1).reset_index(drop=True)
 df.head(4)
 ```
@@ -96,7 +96,7 @@ print(summarize_waste(df))
 ### โหลดสมาชิก
 
 ```python
-df_cust = spark.read.table("bronze_customers").toPandas()
+df_cust = spark.read.table("bronze.customers").toPandas()
 print(df_cust.shape)
 print("Age missing:", df_cust["Age"].isna().sum())
 ```
@@ -133,10 +133,10 @@ print("Age missing:", df_cust["Age"].isna().sum())
 
 เซลล์บันทึกจะเขียน:
 
-- ตาราง `silver_customer_features`
+- ตาราง `silver.customer_features`
 - `Files/params/feature_params.json`
 
-**จุดตรวจ:** Refresh **Tables** แล้วเห็น `silver_customer_features` และเซลล์สุดท้ายพิมพ์ `Lab 2 verification passed`
+**จุดตรวจ:** Refresh **Tables** แล้วเห็น `silver.customer_features` และเซลล์สุดท้ายพิมพ์ `Lab 2 verification passed`
 
 ## บันทึก notebook และจบ session
 
@@ -146,7 +146,7 @@ print("Age missing:", df_cust["Age"].isna().sum())
 ## ผ่านแล็บเมื่อ
 
 - [ ] ได้ใช้ Data Wrangler กับธุรกรรม และ **Add code to notebook** อย่างน้อยหนึ่งครั้ง
-- [ ] มี `silver_customer_features` 1,500 แถว
+- [ ] มี `silver.customer_features` 1,500 แถว
 - [ ] มี `feature_params.json` จากชุดฝึก
 - [ ] `Lab 2 verification passed`
 

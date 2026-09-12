@@ -14,8 +14,8 @@ DATA = ROOT / "data"
 OUT = DATA / ".local" / "delta_upload"
 
 TABLES = {
-    "bronze_transactions": "freshmart_transactions.csv",
-    "bronze_customers": "freshmart_customers.csv",
+    "bronze/transactions": "freshmart_transactions.csv",
+    "bronze/customers": "freshmart_customers.csv",
 }
 
 
@@ -72,7 +72,7 @@ def build() -> None:
         protocol = {"protocol": {"minReaderVersion": 1, "minWriterVersion": 2}}
         metadata = {
             "metaData": {
-                "id": f"freshmart-{table}",
+                "id": f"freshmart-{table.replace('/', '-')}",
                 "format": {"provider": "parquet", "options": {}},
                 "schemaString": json.dumps(
                     {"type": "struct", "fields": fields}, separators=(",", ":")

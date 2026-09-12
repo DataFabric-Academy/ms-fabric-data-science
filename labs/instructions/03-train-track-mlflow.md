@@ -6,7 +6,7 @@
 
 ## สิ่งที่ต้องมี
 
-- ตาราง `silver_customer_features` และ `Files/params/feature_params.json` จาก Lab 2
+- ตาราง `silver.customer_features` และ `Files/params/feature_params.json` จาก Lab 2
 - Import `labs/notebooks/03-train-track-mlflow.ipynb` → ชื่อ `03_FreshMart_Model_Training_MLflow`
 - แนบ `lh_freshmart`
 

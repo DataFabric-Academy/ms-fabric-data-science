@@ -27,3 +27,4 @@ def test_notebooks_are_valid_json() -> None:
             for cell in payload["cells"]
         )
         assert "verification passed" in sources.lower() or "Lab 0 verification" in sources
+        assert "ถ้าติด" in sources or "กฎทอง" in sources or "ความรู้" in sources

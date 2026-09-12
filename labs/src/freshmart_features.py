@@ -136,7 +136,7 @@ def validate_raw_customers(df: pd.DataFrame, *, require_target: bool = True) -> 
     """Validate and normalize a raw FreshMart customer frame.
 
     Args:
-        df: Raw customer records from CSV or ``bronze_customers``.
+        df: Raw customer records from CSV or ``bronze.customers``.
         require_target: When True, require the ``Churn`` column.
 
     Returns:

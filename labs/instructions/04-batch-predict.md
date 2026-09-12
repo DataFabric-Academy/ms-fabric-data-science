@@ -64,7 +64,7 @@ df_scored = model.transform(spark_features)
   - `1` → `High - Send Retention Voucher`
   - `0` → `Normal - Standard Engagement`
 
-เขียน Delta table `gold_freshmart_predictions` แบบ overwrite
+เขียน Delta table `gold.freshmart_predictions` แบบ overwrite
 
 **จุดตรวจ:** Refresh **Tables** แล้วเห็นตาราง Gold **200** แถว  
 ชุดทดสอบท้องถิ่น ≈ **36 High** / **164 Normal** (บน Fabric อาจขยับเล็กน้อยถ้า dtype ไม่ตรง)
@@ -75,7 +75,7 @@ df_scored = model.transform(spark_features)
 
 ```sql
 SELECT Action_Priority, COUNT(*) AS CustomerCount
-FROM gold_freshmart_predictions
+FROM gold.freshmart_predictions
 GROUP BY Action_Priority;
 ```
 

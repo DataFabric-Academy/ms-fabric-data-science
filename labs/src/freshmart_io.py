@@ -2,6 +2,9 @@
 
 Notebooks prefer Lakehouse tables when Spark is available, then fall back
 to the repo CSV files so the same notebook can be smoke-tested locally.
+
+Table names are schema-qualified (``bronze.transactions``). Legacy flat names
+still resolve during the medallion migration window.
 """
 
 from __future__ import annotations
@@ -11,19 +14,18 @@ from pathlib import Path
 
 import pandas as pd
 
+from freshmart_tables import (
+    CSV_SCORING,
+    TABLE_TO_CSV,
+    spark_table_candidates,
+)
+
 logger = logging.getLogger(__name__)
 
 LABS_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = LABS_ROOT / "data"
 
-TABLE_TO_CSV = {
-    "bronze_transactions": "freshmart_transactions.csv",
-    "bronze_customers": "freshmart_customers.csv",
-    "silver_customer_features": "silver_customer_features.csv",
-    "gold_freshmart_predictions": "gold_freshmart_predictions.csv",
-}
-
-SCORING_CSV = "freshmart_scoring_batch.csv"
+SCORING_CSV = CSV_SCORING
 LOCAL_ARTIFACT_DIR = DATA_DIR / ".local"
 FEATURE_PARAMS_PATH = LOCAL_ARTIFACT_DIR / "feature_params.json"
 
@@ -65,25 +67,35 @@ def resolve_data_file(*relative_names: str) -> Path:
 def _spark_table(table_name: str) -> pd.DataFrame | None:
     """Read a Lakehouse table when Spark is available."""
     try:
-        spark = globals().get("spark") or __import__("pyspark.sql", fromlist=["SparkSession"]).SparkSession.getActiveSession()
+        spark = globals().get("spark") or __import__(
+            "pyspark.sql", fromlist=["SparkSession"]
+        ).SparkSession.getActiveSession()
     except Exception:
         spark = None
     if spark is None:
         return None
-    try:
-        frame = spark.read.table(table_name).toPandas()
-        logger.info("Loaded Spark table %s (%s rows)", table_name, len(frame))
-        return frame
-    except Exception as exc:  # noqa: BLE001 - Fabric/local fallback is intentional
-        logger.info("Spark table %s unavailable (%s); falling back to CSV", table_name, exc)
-        return None
+    last_error: Exception | None = None
+    for candidate in spark_table_candidates(table_name):
+        try:
+            frame = spark.read.table(candidate).toPandas()
+            logger.info("Loaded Spark table %s (%s rows)", candidate, len(frame))
+            return frame
+        except Exception as exc:  # noqa: BLE001 - Fabric/local fallback is intentional
+            last_error = exc
+            continue
+    logger.info(
+        "Spark table %s unavailable (%s); falling back to CSV",
+        table_name,
+        last_error,
+    )
+    return None
 
 
 def load_table_or_csv(table_name: str, csv_name: str | None = None) -> pd.DataFrame:
     """Load a lab table from Spark, then from the published CSV.
 
     Args:
-        table_name: Lakehouse table name.
+        table_name: Lakehouse table name (``bronze.transactions`` or legacy flat).
         csv_name: Optional CSV override. Defaults to the known mapping.
 
     Returns:
