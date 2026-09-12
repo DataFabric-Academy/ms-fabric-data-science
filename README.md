@@ -10,39 +10,51 @@ Repository ชุดปฏิบัติการวิทยาศาสตร
 - **หลักสูตรอ้างอิง:** [Implement a data science and machine learning solution for AI in Microsoft Fabric](https://learn.microsoft.com/training/paths/implement-data-science-machine-learning-fabric/) (พร้อมเนื้อหาสไลด์ภาษาไทยฉบับ Instructor Edition)
 
 ```mermaid
-flowchart LR
-    subgraph S1["1. ข้อมูลดิบ"]
-        CSV["CSV Transactions & Customers<br/>(Files/raw/)"]
+flowchart TD
+    subgraph S1 ["1. แหล่งข้อมูลดิบ (Landing Zone)"]
+        CSV["📄 <b>ไฟล์ข้อมูลดิบ (Files/raw/)</b><br/>freshmart_transactions.csv (3,000 แถว) & customers.csv (1,500 แถว)"]
     end
 
-    subgraph S2["2. OneLake & Medallion"]
-        B["Bronze<br/>(bronze.customers / transactions)"]
-        S["Silver<br/>(silver.customer_features)"]
-        G["Gold<br/>(gold.freshmart_predictions)"]
-        CSV --> B
-        B -->|Lab 2: Data Wrangler| S
+    subgraph S2 ["2. OneLake & Medallion Architecture (Lakehouse)"]
+        B["🥉 <b>Bronze Schema</b><br/>ตาราง Delta ข้อมูลดิบ bronze.transactions & customers (Lab 0)"]
+        S["🥈 <b>Silver Schema</b><br/>ตารางฟีเจอร์ silver.customer_features (Lab 2: Data Wrangler)"]
+        B -->|ทำความสะอาด & สเกลฟีเจอร์| S
     end
 
-    subgraph S3["3. ฝึกและติดตามโมเดล"]
-        EXP["Lab 3: MLflow Experiment<br/>(Decision Tree vs Random Forest)"]
-        REG["Model Registry<br/>(freshmart-churn-model: Champion)"]
-        S -->|Train / Test Split| EXP
-        EXP -->|เลือกโมเดลที่ดีที่สุด| REG
+    subgraph S3 ["3. การเรียนรู้ของเครื่อง (Data Science & MLflow)"]
+        EXP["🧪 <b>MLflow Experiment: freshmart-churn</b><br/>เปรียบเทียบ Decision Tree (AUC ≈ 0.77) vs Random Forest (AUC ≈ 0.86 ⭐)"]
+        REG["🏆 <b>Model Registry: freshmart-churn-model</b><br/>ลงทะเบียนเวอร์ชัน Champion พร้อม Model Signature (Lab 3)"]
+        EXP -->|คัดเลือกโมเดลที่ดีที่สุด| REG
     end
 
-    subgraph S4["4. นำไปใช้จริงในธุรกิจ"]
-        PRED["Lab 4: Batch Scoring (PREDICT)"]
-        PBI["Power BI Report<br/>(Direct Lake: ชี้เป้าลูกค้าเสี่ยง)"]
-        REG --> PRED
-        S -.->|Scoring Batch| PRED
+    subgraph S4 ["4. ปฏิบัติการทางธุรกิจ (Serving & Power BI)"]
+        PRED["⚡ <b>ฟังก์ชัน PREDICT (ประมวลผลบน Spark)</b><br/>ทำนายลูกค้าชุดใหม่ 200 รายจาก freshmart_scoring_batch.csv (Lab 4)"]
+        G["🥇 <b>Gold Schema</b><br/>ตารางผลลัพธ์ gold.freshmart_predictions"]
+        PBI["📊 <b>Power BI Dashboard (Direct Lake)</b><br/>ชี้เป้าลูกค้าเสี่ยง Churn ส่งต่อทีมการตลาดออกโปรโมชั่นรักษาลูกค้า"]
         PRED --> G
         G --> PBI
     end
 
-    classDef stage fill:#f8f9fa,stroke:#495057,stroke-width:1px;
-    classDef highlight fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
+    CSV --> B
+    S -->|แบ่งข้อมูล Train / Test| EXP
+    REG -->|โหลดโมเดล Champion| PRED
+    S -.->|พารามิเตอร์ฟีเจอร์| PRED
+
+    classDef stage fill:#f8fafc,stroke:#475569,stroke-width:2px,color:#0f172a;
+    classDef raw fill:#ffffff,stroke:#64748b,stroke-width:1.5px,color:#0f172a;
+    classDef silver fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px,color:#14532d;
+    classDef ml fill:#eff6ff,stroke:#2563eb,stroke-width:1.5px,color:#1e3a8a;
+    classDef champion fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
+    classDef gold fill:#fffbeb,stroke:#b45309,stroke-width:2px,color:#78350f;
+    classDef pbi fill:#faf5ff,stroke:#9333ea,stroke-width:2px,color:#581c87;
+
     class S1,S2,S3,S4 stage;
-    class REG,G,PBI highlight;
+    class CSV,B raw;
+    class S silver;
+    class EXP ml;
+    class REG champion;
+    class PRED,G gold;
+    class PBI pbi;
 ```
 
 ## โครงการ (Project)
