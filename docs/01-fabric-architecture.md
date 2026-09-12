@@ -47,30 +47,60 @@
 
 ## ชั้นข้อมูล Bronze / Silver / Gold สำหรับงานวิทยาศาสตร์ข้อมูล
 
-| ชั้น | ความหมายใน FreshMart |
-| --- | --- |
-| **Bronze** | ข้อมูลดิบใกล้แหล่ง เช่น `bronze.customers`, `bronze.transactions` |
-| **Silver** | ทำความสะอาดและสร้างฟีเจอร์ เช่น `silver.customer_features` |
-| **Gold** | ผลลัพธ์พร้อมใช้ธุรกิจ เช่น `gold.freshmart_predictions` |
+> [!TIP]
+> **เปรียบ Medallion Architecture เหมือนครัวภัตตาคารมืออาชีพ**  
+> เพื่อไม่ให้ข้อมูลปนเปื้อน Fabric จัดระเบียบข้อมูลเป็น 3 สัญญาคุณภาพ (Quality Contracts):  
+> - 🥉 **Bronze (วัตถุดิบสดหลังรถขนส่ง):** เก็บข้อมูลดิบตามต้นฉบับ เช่น ประวัติสแกนบาร์โค้ดที่อาจมีค่าว่างหรือฟอร์แมตวันที่ต่างกัน  
+> - 🥈 **Silver (วัตถุดิบที่ล้าง หั่น และเตรียมพร้อมปรุง):** ผ่านการทำความสะอาด ลบค่าซ้ำ เติมค่าว่าง และคำนวณตัวชี้วัด (Features) พร้อมป้อนเข้าโมเดล  
+> - 🥇 **Gold (จานอาหารปรุงสุกพร้อมเสิร์ฟขึ้นโต๊ะ):** ผลลัพธ์จากการทำนายของโมเดลที่สะอาด สมบูรณ์ พร้อมให้ผู้บริหารและฝ่ายการตลาดเปิดดูผ่าน Power BI ได้ทันที
 
-หลักการ: โมเดลอ่านจาก Silver (ฟีเจอร์ที่นิยามชัด) แล้วเขียนคะแนนไป Gold เพื่อให้รายงานธุรกิจใช้ — ไม่ฝึกโมเดลตรงจากไฟล์ดิบโดยไม่มีสัญญาข้อมูล
+```mermaid
+flowchart TD
+    subgraph Lakehouse["Lakehouse: lh_freshmart (เปิดใช้งาน Schemas)"]
+        subgraph FilesZone["Files (โซนไฟล์ดิบที่ยังไม่ได้จัดโครงสร้าง)"]
+            RAW["raw/freshmart_*.csv<br/>(โซนลงจอดไฟล์ดิบ)"]
+        end
 
-### ทำไมชื่อ schema สำคัญต่อ Medallion
+        subgraph TablesZone["Tables (ตาราง Delta พร้อมสัญญาคุณภาพ)"]
+            subgraph BronzeSchema["schema: bronze (สัญญา: วัตถุดิบดิบ)"]
+                BT["transactions (3,000 แถว)"]
+                BC["customers (1,500 แถว)"]
+            end
+            subgraph SilverSchema["schema: silver (สัญญา: ฟีเจอร์พร้อมเทรน)"]
+                SF["customer_features<br/>(รวมตาราง, จัดการค่าว่าง, ปรับสเกล)"]
+            end
+            subgraph GoldSchema["schema: gold (สัญญา: ผลลัพธ์พร้อมใช้)"]
+                GP["freshmart_predictions<br/>(200 ลูกค้าใหม่ + ความน่าจะเป็น Churn)"]
+            end
+        end
+    end
 
-Medallion คือ**สัญญาคุณภาพ**สามชั้น ไม่ใช่แค่คำนำหน้าชื่อตาราง  
-ในแล็บ FreshMart เราทำให้ชั้นนั้นเป็น **schema** ใน lakehouse เดียว `lh_freshmart` เพื่อให้ Spark และ SQL ชี้ตารางด้วยรูปแบบ `schema.table`
+    RAW -->|Lab 0: Ingestion & สร้างตาราง| BronzeSchema
+    BronzeSchema -->|Lab 2: Data Wrangler & Feature Engineering| SilverSchema
+    SilverSchema -->|Lab 4: PREDICT Function| GoldSchema
 
-| Schema | สัญญา | ใครเขียน / ใครอ่านในแล็บ |
-| --- | --- | --- |
-| `bronze` | ใกล้ไฟล์ดิบ ยังไม่ล็อกฟีเจอร์ | Lab 0 เขียน · Lab 1 อ่าน |
-| `silver` | สะอาดและล็อกคอลัมน์อินพุตของโมเดล | Lab 2 เขียน · Lab 3 อ่าน |
-| `gold` | พร้อมแคมเปญหรือรายงาน | Lab 4 เขียน |
+    classDef schemaBox fill:#ffffff,stroke:#2b5797,stroke-width:1.5px;
+    class BronzeSchema,SilverSchema,GoldSchema schemaBox;
+```
 
-ชื่อ schema จึงบอกว่าตารางอยู่ในสัญญาชั้นไหน — `bronze.transactions` กับ `gold.freshmart_predictions` คนละชั้นอย่างชัดเจน  
-อย่าสับสนกับ `Files/raw/` — นั่นคือโซนลงจอดไฟล์ ยังไม่ใช่ตาราง Bronze จนกว่าจะเขียนเป็น Delta ใน schema `bronze`
+| ชั้น | สัญญาข้อมูล (Contract) | ตัวอย่างใน FreshMart | ใครเขียน / ใครอ่านในแล็บ |
+| --- | --- | --- | --- |
+| **Bronze** | ใกล้แหล่งข้อมูลดิบ ยังไม่ล็อกฟีเจอร์ | `bronze.customers`, `bronze.transactions` | Lab 0 เขียน · Lab 1 อ่าน |
+| **Silver** | สะอาด เป็นระเบียบ ล็อกคอลัมน์อินพุต | `silver.customer_features` | Lab 2 เขียน · Lab 3 อ่าน |
+| **Gold** | ผลลัพธ์ธุรกิจพร้อมนำไปปฏิบัติการ | `gold.freshmart_predictions` | Lab 4 เขียน · Power BI อ่าน |
 
-ในองค์กร Microsoft แนะนำให้แยก **lakehouse ต่อชั้น** ได้เมื่อต้องการขอบเขตสิทธิ์หรือทีมชัดเจน — สัญญา Bronze / Silver / Gold เหมือนกัน แค่เส้นแบ่งทางกายภาพต่างกัน  
-ชุดนี้ใช้ schema ใน lakehouse เดียวเพราะผู้เรียนคนเดียวทำครบวงจรบน Trial ของตนเอง  
+หลักการ: โมเดล Machine Learning จะอ่านจาก Silver (ฟีเจอร์ที่สะอาดและนิยามชัดเจน) แล้วเขียนคะแนนกลับไปที่ Gold เพื่อให้ทีมธุรกิจนำไปใช้ — **เราจะไม่ฝึกโมเดลตรงจากไฟล์ดิบโดยไม่มีสัญญาข้อมูล**
+
+### ทำไมชื่อ schema ถึงสำคัญอย่างยิ่งใน Fabric?
+
+> [!IMPORTANT]
+> **Schema คือสัญญาคุณภาพ (Quality Boundary) ไม่ใช่แค่โฟลเดอร์จัดระเบียบ**  
+> ในแล็บ FreshMart เราเปิดใช้งาน **Lakehouse schemas** เพื่อให้ระบบรองรับการอ้างอิงตารางแบบ `schema.table` สองระดับ:  
+> - `bronze.transactions` กับ `gold.freshmart_predictions` มีเส้นแบ่งสิทธิ์และความรับผิดชอบชัดเจน  
+> - `Files/raw/` เป็นเพียงโซนลงจอดไฟล์ CSV จากภายนอก ยังไม่นับเป็นตาราง Bronze จนกว่าจะถูกโหลดเข้าสู่โครงสร้าง Delta ใน schema `bronze`  
+> - การเปิดใช้งาน **Lakehouse schemas** ต้องเลือกเปิดตั้งแต่ตอนสร้าง Lakehouse ในขั้นตอนแรกเท่านั้น
+
+ในระดับองค์กร Microsoft แนะนำว่าสามารถแยกเป็น **Lakehouse ต่อชั้น (Bronze LH / Silver LH / Gold LH)** ได้หากต้องการขอบเขตสิทธิ์ที่แยกกันเด็ดขาด แต่สำหรับคอร์สนี้เราใช้โครงสร้าง 1 Lakehouse หลาย schemas เพื่อความสะดวกและประหยัด Capacity  
 อ้างอิง: [Understand medallion architecture for Fabric with OneLake](https://learn.microsoft.com/fabric/onelake/onelake-medallion-lakehouse-architecture) · [Lakehouse schemas](https://learn.microsoft.com/fabric/data-engineering/lakehouse-schemas)
 
 ## ความเข้าใจผิดที่พบบ่อย

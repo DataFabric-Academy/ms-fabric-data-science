@@ -18,30 +18,54 @@
 5. Import notebook จาก `labs/notebooks/` แล้วแนบ Default Lakehouse = **`lh_freshmart`**
 6. ทำตามคู่มือใน `labs/instructions/` — รันทีละขั้น ดูผล แล้วไปต่อ
 
-## Workspace ของผู้เรียน
+> [!IMPORTANT]
+> **กติกาสำคัญสำหรับการใช้งานห้องปฏิบัติการ (Single-User Workspace Rule):**  
+> แต่ละท่านต้องใช้ **Fabric Trial และ Workspace ส่วนตัวของตนเอง** (แนะนำให้ตั้งชื่อว่า `labs`)  
+> **ห้ามเชิญเพื่อนร่วมคลาสหรือผู้สอนเข้า Workspace โดยเด็ดขาด** เพื่อป้องกันปัญหา Spark Session ชนกัน และป้องกันการแย่งโควตา Capacity ของกันและกัน
 
-แต่ละคนใช้ Trial และ workspace ของตนเอง ไม่มี workspace ร่วม และไม่มีคำเชิญเข้า workspace ของผู้อื่น
+## แผนผังลำดับการลงมือปฏิบัติ (Lab Pipeline)
 
-| รายการ | ค่า |
-| --- | --- |
-| Capacity | Fabric Trial ของตนเอง (หรือ Capacity ที่รองรับ Fabric) |
-| Workspace | สร้างเอง แนะนำชื่อ `labs` |
-| Lakehouse | สร้างเอง ชื่อ `lh_freshmart` (เปิด Lakehouse schemas) |
-| ข้อมูลเริ่มต้น | อัปโหลด `labs/data/*.csv` ไปที่ `Files/raw/` แล้วรันเซลล์สร้างตาราง Bronze ใน Lab 0 |
+```mermaid
+flowchart TD
+    subgraph Lab0["Lab 0: เตรียมสภาพแวดล้อม"]
+        L0["สร้าง lh_freshmart (เปิด Schemas)<br/>อัปโหลด CSV 3 ไฟล์สู่ Files/raw/<br/>สร้างตาราง bronze.transactions & customers"]
+    end
 
-ถ้ามี lakehouse เก่าที่ยังใช้ชื่อตารางแบบเดิม (เช่น `bronze_transactions`) ดู [instructions/instructor-migrate-schemas.md](instructions/instructor-migrate-schemas.md)
+    subgraph Lab1["Lab 1: สำรวจข้อมูล (EDA)"]
+        L1["วิเคราะห์ของเสีย & Churn Rate (~19.3%)<br/>ตรวจพบ Age ว่าง 37 รายการ<br/>พล็อตกราฟ Correlation & Distribution"]
+    end
 
-## ลำดับแล็บ
+    subgraph Lab2["Lab 2: เตรียมฟีเจอร์ด้วย Data Wrangler"]
+        L2["คลิกทำความสะอาดผ่าน UI แล้ว Add Code<br/>บันทึก feature_params.json ป้องกัน Data Leakage<br/>สร้างตาราง silver.customer_features"]
+    end
 
-| Lab | คู่มือ | Notebook | ผลลัพธ์ที่ควรได้ |
-| --- | --- | --- | --- |
-| 0 | [00-lakehouse-setup.md](instructions/00-lakehouse-setup.md) | `00-environment-verification.ipynb` | สร้าง workspace ของตนเอง + `lh_freshmart` แล้วผ่านจุดตรวจอัตโนมัติ |
-| 1 | [01-explore-data.md](instructions/01-explore-data.md) | `01-explore-data.ipynb` | สำรวจของเสียและพฤติกรรมลูกค้าที่เลิกซื้อ (Churn) |
-| 2 | [02-preprocess-data-wrangler.md](instructions/02-preprocess-data-wrangler.md) | `02-preprocess-data-wrangler.ipynb` | ใช้ Data Wrangler และได้ `silver.customer_features` พร้อมไฟล์ params |
-| 3 | [03-train-track-mlflow.md](instructions/03-train-track-mlflow.md) | `03-train-track-mlflow.ipynb` | มี Experiment และโมเดล `freshmart-churn-model` |
-| 4 | [04-batch-predict.md](instructions/04-batch-predict.md) | `04-batch-predict.ipynb` | ได้ตาราง `gold.freshmart_predictions` สำหรับแคมเปญ |
+    subgraph Lab3["Lab 3: ฝึกและติดตามโมเดลด้วย MLflow"]
+        L3["Experiment: freshmart-churn<br/>Run 1: Decision Tree (AUC ≈ 0.77)<br/>Run 2: Random Forest (AUC ≈ 0.86 ⭐)<br/>ลงทะเบียน Champion สู่ Model Registry"]
+    end
 
-Checklist รันบนหน้าจอ Lab 0–2: [run-checklist-lab0-2.md](instructions/run-checklist-lab0-2.md)
+    subgraph Lab4["Lab 4: ทำนายผลเป็นชุดสู่ Gold"]
+        L4["โหลด Scoring Batch 200 รายการ<br/>รันฟังก์ชัน PREDICT บน Spark<br/>เขียนผลลง gold.freshmart_predictions<br/>พร้อมส่งต่อแดชบอร์ด Power BI"]
+    end
+
+    Lab0 --> Lab1 --> Lab2 --> Lab3 --> Lab4
+
+    style Lab0 fill:#f9fbe7,stroke:#827717
+    style Lab1 fill:#e0f2f1,stroke:#004d40
+    style Lab2 fill:#e1f5fe,stroke:#01579b
+    style Lab3 fill:#f3e5f5,stroke:#4a148c
+    style Lab4 fill:#fff8e1,stroke:#ff6f00
+```
+
+## ลำดับแล็บและผลลัพธ์ที่คาดหวัง
+
+| Lab | คู่มือปฏิบัติ | สมุดโค้ด (Notebook) | ผลลัพธ์ที่ส่งมอบ (Key Deliverable) |
+| :---: | :--- | :--- | :--- |
+| **0** | [00-lakehouse-setup.md](instructions/00-lakehouse-setup.md) | `00-environment-verification.ipynb` | Workspace ส่วนตัว + `lh_freshmart` พร้อมตาราง Bronze ผ่านการทดสอบ |
+| **1** | [01-explore-data.md](instructions/01-explore-data.md) | `01-explore-data.ipynb` | รายงานสถิติและกราฟพฤติกรรม Churn ของลูกค้า FreshMart |
+| **2** | [02-preprocess-data-wrangler.md](instructions/02-preprocess-data-wrangler.md) | `02-preprocess-data-wrangler.ipynb` | ตาราง `silver.customer_features` และไฟล์ `feature_params.json` |
+| **3** | [03-train-track-mlflow.md](instructions/03-train-track-mlflow.md) | `03-train-track-mlflow.ipynb` | Experiment เปรียบเทียบสองโมเดล และ Champion `freshmart-churn-model` |
+| **4** | [04-batch-predict.md](instructions/04-batch-predict.md) | `04-batch-predict.ipynb` | ตาราง Delta `gold.freshmart_predictions` สำหรับทีมการตลาด |
+
 
 ## ข้อมูลที่ใช้
 
