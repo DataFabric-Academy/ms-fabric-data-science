@@ -9,7 +9,7 @@
 
 - โมเดล `freshmart-churn-model` Version 1
 - `Files/params/feature_params.json` จาก Lab 2
-- Import `labs/notebooks/04-batch-predict.ipynb` แล้วตั้งชื่อ `04_FreshMart_Batch_Scoring`
+- กด **Import** > **Notebook** (ไม่ต้อง **+ New item**) เลือก `labs/notebooks/04-batch-predict.ipynb` แล้วตั้งชื่อ `04_FreshMart_Batch_Scoring`
 - แนบ `lh_freshmart`
 
 ## กฎทองหนึ่งข้อ

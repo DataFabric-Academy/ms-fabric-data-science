@@ -61,16 +61,19 @@
 
 ## นำเข้า notebook แล้วสร้างตาราง Bronze
 
-1. ใน Workspace กด **+ New item** แล้วเลือก **Notebook** จากนั้น **Create**
-2. ใน Notebook: **File / …** แล้วเลือก **Import notebook / Upload**
-3. เลือก `labs/notebooks/00-environment-verification.ipynb` จากเครื่อง
-4. ตั้งชื่อ `00_FreshMart_Environment_Verification`
-5. ด้านซ้ายแนบ Default Lakehouse = **`lh_freshmart`**
-6. รอ Spark พร้อม (รอบแรกอาจ 1–2 นาที) แล้วรันทุกเซลล์ตามลำดับ — เซลล์สร้าง schema `bronze` / `silver` / `gold` และตาราง `bronze.transactions`, `bronze.customers` จากไฟล์ใน `Files/raw/`
+การนำเข้าสร้างรายการ Notebook ใน workspace ให้เอง — **อย่ากด + New item** เพื่อสร้าง notebook ว่างก่อน
+
+1. ใน workspace กด **Import** แล้วเลือก **Notebook** > **From this computer**
+2. กด **Upload** แล้วเลือก `labs/notebooks/00-environment-verification.ipynb` จากเครื่อง
+3. ตั้งชื่อ `00_FreshMart_Environment_Verification`
+4. ด้านซ้ายแนบ Default Lakehouse = **`lh_freshmart`**
+5. รอ Spark พร้อม (รอบแรกอาจ 1–2 นาที) แล้วรันทุกเซลล์ตามลำดับ — เซลล์สร้าง schema `bronze` / `silver` / `gold` และตาราง `bronze.transactions`, `bronze.customers` จากไฟล์ใน `Files/raw/`
 
 **สิ่งที่ควรเห็น:** เซลล์สร้างตารางพิมพ์จำนวนแถวประมาณ **3,000** และ **1,500** จากนั้นเซลล์สุดท้ายพิมพ์ `Lab 0 verification passed`
 
-Lab ถัดไปใช้วิธีเดียวกัน: Import จาก `labs/notebooks/` แล้วแนบ `lh_freshmart`
+Lab ถัดไปใช้วิธีเดียวกัน: กด **Import** จาก `labs/notebooks/` แล้วแนบ `lh_freshmart` — ไม่ต้องสร้าง notebook ว่าง
+
+อ้างอิง: [Import items](https://learn.microsoft.com/fabric/fundamentals/create-items-in-workspaces#import-items) · [Import existing notebooks](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook#import-existing-notebooks)
 
 ## ตรวจตาราง Bronze บนหน้า Lakehouse
 
@@ -114,6 +117,7 @@ ORDER BY TotalWasteCost DESC;
 | ไม่เห็นปุ่ม Start trial | ลองสร้างรายการ Fabric เพื่อกระตุ้น Trial หรือให้ผู้สอนดู tenant setting — **อย่าขอเข้า workspace ของผู้อื่น** |
 | สร้าง Lakehouse ไม่ได้ | ตรวจว่า workspace อยู่บน **Fabric Trial** ไม่ใช่ Personal |
 | ไม่เจอไฟล์ใน `Files/raw/` | อัปโหลดสามไฟล์จาก `labs/data/` หลัง clone repository |
-| Import ไม่ขึ้น | เลือกไฟล์ `.ipynb` จาก `labs/notebooks/` หลัง clone |
+| Import ไม่ขึ้น | ใช้ปุ่ม **Import** ของ workspace (ไม่ใช่ **+ New item**) แล้วเลือกไฟล์ `.ipynb` จาก `labs/notebooks/` หลัง clone |
+| มี notebook ว่างค้างใน workspace | ลบรายการที่สร้างจาก **+ New item** ได้ — ใช้เฉพาะตัวที่นำเข้าจากไฟล์ `.ipynb` |
 | Spark ค้าง Starting | รอ cold start แล้วรันเซลล์เดิมอีกครั้ง |
 | SQL ไม่เจอ `bronze.transactions` | รันเซลล์สร้างตารางใน notebook ให้จบ แล้ว Refresh ที่ Lakehouse |

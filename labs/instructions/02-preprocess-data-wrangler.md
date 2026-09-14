@@ -8,7 +8,7 @@
 ## สิ่งที่ต้องมี
 
 - Lab 1 ผ่านแล้ว
-- Import `labs/notebooks/02-preprocess-data-wrangler.ipynb` แล้วตั้งชื่อ `02_FreshMart_Data_Preparation`
+- กด **Import** > **Notebook** (ไม่ต้อง **+ New item**) เลือก `labs/notebooks/02-preprocess-data-wrangler.ipynb` แล้วตั้งชื่อ `02_FreshMart_Data_Preparation`
 - แนบ `lh_freshmart`
 
 ## สองส่วนในแล็บนี้

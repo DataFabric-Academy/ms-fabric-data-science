@@ -16,7 +16,7 @@
 2. `git clone` repository นี้
 3. สร้าง workspace ของตนเองบน Fabric (แนะนำชื่อ **`labs`**) — **อย่าเชิญใครเข้า**
 4. สร้าง Lakehouse **`lh_freshmart`** แล้วอัปโหลด CSV จาก `labs/data/` ตาม [Lab 0](instructions/00-lakehouse-setup.md)
-5. Import notebook จาก `labs/notebooks/` แล้วแนบ Default Lakehouse = **`lh_freshmart`**
+5. กด **Import** จาก `labs/notebooks/` (ไม่ต้อง **+ New item**) แล้วแนบ Default Lakehouse = **`lh_freshmart`**
 6. ทำตามคู่มือใน `labs/instructions/` — รันทีละขั้น ดูผล แล้วไปต่อ
 
 > [!IMPORTANT]

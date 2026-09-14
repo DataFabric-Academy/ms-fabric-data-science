@@ -8,7 +8,7 @@
 ## สิ่งที่ต้องมี
 
 - Lab 0 ผ่านแล้ว
-- Import `labs/notebooks/01-explore-data.ipynb` แล้วตั้งชื่อ `01_FreshMart_Exploratory_Data_Analysis`
+- กด **Import** > **Notebook** (ไม่ต้อง **+ New item**) เลือก `labs/notebooks/01-explore-data.ipynb` แล้วตั้งชื่อ `01_FreshMart_Exploratory_Data_Analysis`
 - แนบ Default Lakehouse = `lh_freshmart`
 
 ## เรื่องราวสั้น ๆ

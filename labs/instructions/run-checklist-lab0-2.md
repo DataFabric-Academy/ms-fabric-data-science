@@ -17,7 +17,7 @@
 - [ ] สร้าง Lakehouse **`lh_freshmart`** (เปิด Lakehouse schemas)
 - [ ] บนเครื่อง: `git clone` repository นี้
 - [ ] อัปโหลด `labs/data/*.csv` ไปที่ `Files/raw/`
-- [ ] ใน Fabric: สร้าง Notebook แล้ว **Import / Upload** จาก `labs/notebooks/` บนเครื่อง
+- [ ] ใน Fabric: กด **Import** > **Notebook** จาก `labs/notebooks/` บนเครื่อง (ไม่ต้อง **+ New item**)
 - [ ] ในแต่ละ Notebook: แนบ Default Lakehouse = **`lh_freshmart`**
 - [ ] รันเซลล์สร้างตาราง Bronze แล้ว Refresh `Tables` / `Files`
 - [ ] เห็นตาราง `bronze.transactions`, `bronze.customers`

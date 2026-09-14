@@ -10,7 +10,7 @@
 ## สิ่งที่ต้องมี
 
 - ตาราง `silver.customer_features` และ `Files/params/feature_params.json` จาก Lab 2
-- Import `labs/notebooks/03-train-track-mlflow.ipynb` แล้วตั้งชื่อ `03_FreshMart_Model_Training_MLflow`
+- กด **Import** > **Notebook** (ไม่ต้อง **+ New item**) เลือก `labs/notebooks/03-train-track-mlflow.ipynb` แล้วตั้งชื่อ `03_FreshMart_Model_Training_MLflow`
 - แนบ `lh_freshmart`
 
 ## แยกชุดฝึก / ทดสอบ
