@@ -1,0 +1,2 @@
+# Layer folders (bronze / silver / gold / params) are created by notebooks at runtime.
+# Published CSVs stay in labs/data/ — do not copy or edit them here.

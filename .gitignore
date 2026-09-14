@@ -9,6 +9,11 @@ __pycache__/
 
 # Local pipeline artifacts
 labs/data/.local/
+labs-azureml/data/bronze/
+labs-azureml/data/silver/
+labs-azureml/data/gold/
+labs-azureml/data/params/
+labs-azureml/data/.local/
 
 # Editor / local tooling (keep out of the published repo)
 .cursor/

@@ -9,6 +9,10 @@ Repository ชุดปฏิบัติการวิทยาศาสตร
 - **กลุ่มเป้าหมาย:** นักวิเคราะห์ข้อมูล (Data Analyst) และผู้สนใจที่ต้องการเข้าใจวงจรงานวิทยาศาสตร์ข้อมูลบน Fabric ครบวงจร  
 - **หลักสูตรอ้างอิง:** [Implement a data science and machine learning solution for AI in Microsoft Fabric](https://learn.microsoft.com/training/paths/implement-data-science-machine-learning-fabric/) (พร้อมเนื้อหาสไลด์ภาษาไทยฉบับ Instructor Edition)
 
+> [!CAUTION]
+> **ทางเลือกฉุกเฉินเมื่อใช้ Fabric Capacity ไม่ได้:** ใช้แทร็ก Azure Machine Learning ที่ [labs-azureml/README.md](labs-azureml/README.md)  
+> ชุดแล็บ Fabric ใน `labs/` **ไม่ถูกแก้และไม่ถูกแทนที่** — เมื่อ Capacity กลับมาให้กลับไปใช้ [labs/README.md](labs/README.md)
+
 ```mermaid
 flowchart TD
     subgraph S1 ["1. รับไฟล์ข้อมูลต้นทาง (Source Landing Zone)"]
@@ -71,6 +75,7 @@ flowchart TD
 | **Docs ทฤษฎีและแนวคิด** | ปูพื้นฐานสถาปัตยกรรม Fabric, วงจร Data Science, และเครื่องมือ | [docs/README.md](docs/README.md) |
 | **อภิธานศัพท์ (Glossary)** | รวบรวมคำศัพท์เทคนิคพร้อมคำอธิบายภาษาไทยที่เข้าใจง่าย | [docs/glossary.md](docs/glossary.md) |
 | **Labs ลงมือปฏิบัติจริง** | คู่มือและ Notebook ตั้งแต่ Lab 0 ถึง Lab 4 | [labs/README.md](labs/README.md) |
+| **Labs Azure ML (ฉุกเฉิน)** | แทร็กสำรองเมื่อไม่มี Fabric Capacity — อย่าแตะไฟล์ใน `labs/` | [labs-azureml/README.md](labs-azureml/README.md) |
 
 > [!NOTE]
 > **เส้นทางผู้เรียน:** ศึกษาเอกสารความรู้ใน [docs](docs/README.md) ตามลำดับโมดูล จากนั้นเปิดใช้งาน Fabric Trial ของตนเอง สร้าง workspace (แนะนำชื่อ `labs`) — **โดยไม่ต้องเชิญผู้อื่นเข้า** — แล้ว `git clone` repository นี้เพื่อนำเข้า Notebook ใน `labs/notebooks/` และแนบ Lakehouse `lh_freshmart` ที่สร้างขึ้น
