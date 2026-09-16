@@ -537,11 +537,16 @@ plt.show()"""
 **อินไซต์ที่คาดหวัง:** Express ของเสียสูงกว่า Hypermarket โดยประมาณ  
 (พื้นที่จัดเก็บจำกัด / ของเสียช่วงสุดสัปดาห์)
 
+Hypermarket กับ Supermarket กล่องมักแบนใกล้ 0 เพราะวันส่วนใหญ่ไม่มีของเสีย — นั่นคือลักษณะข้อมูล ไม่ใช่กราฟพัง
+
 ไม่ต้องได้ตัวเลขเป๊ะทุกทศนิยม — เห็นแนวโน้มถูกทางพอ"""
             ),
             code_cell(
                 """plt.figure(figsize=(10, 5))
-sns.boxplot(data=df, x="StoreType", y="WasteUnits", hue="StoreType", palette="Set2", legend=False)
+ax = sns.boxplot(data=df, x="StoreType", y="WasteUnits", hue="StoreType", palette="Set2", dodge=False)
+legend = ax.get_legend()
+if legend is not None:
+    legend.remove()
 plt.title("Waste Units by Store Type")
 plt.show()"""
             ),
