@@ -85,7 +85,7 @@ class FeatureParams:
         return asdict(self)
 
     @classmethod
-    def from_dict(cls, payload: dict[str, Any]) -> FeatureParams:
+    def from_dict(cls, payload: dict[str, Any]) -> "FeatureParams":
         """Create parameters from a dictionary.
 
         Args:

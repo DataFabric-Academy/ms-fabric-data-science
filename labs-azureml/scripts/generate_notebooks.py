@@ -264,6 +264,19 @@ FEATURE_COLUMNS = {features.FEATURE_COLUMNS!r}
 REQUIRED_RAW_COLUMNS = {features.REQUIRED_RAW_COLUMNS!r}
 '''.strip()
 
+# PEP 563: postpone annotation evaluation so `-> FeatureParams` inside the
+# class body does not raise NameError when this snippet is pasted into a cell.
+FEATURE_CONTRACT_CELL = (
+    "from __future__ import annotations\n\n"
+    "from dataclasses import asdict, dataclass\n"
+    "from typing import Any\n"
+    "import logging\n\n"
+    "logger = logging.getLogger(__name__)\n\n"
+    + CONSTANTS
+    + "\n\n"
+    + FEATURE_SOURCE
+)
+
 
 def write_notebook(name: str, cells: list[dict]) -> None:
     """Serialize a notebook to labs-azureml/notebooks."""
@@ -719,10 +732,7 @@ df_cust.head(3)"""
 
 **รันเซลล์ฟังก์ชันก่อน** แล้วค่อยรันเซลล์ `fit` / `transform`"""
             ),
-            code_cell(
-                "from dataclasses import asdict, dataclass\nfrom typing import Any\nimport logging\n\n"
-                "logger = logging.getLogger(__name__)\n\n" + CONSTANTS + "\n\n" + FEATURE_SOURCE
-            ),
+            code_cell(FEATURE_CONTRACT_CELL),
             md_cell(
                 """### fit แล้ว transform
 
@@ -809,10 +819,7 @@ AUC คือคะแนนแยกคนมีแนวโน้ม Churn ก
             ),
             md_cell("### เตรียม loader + ฟังก์ชันฟีเจอร์ (รันตามลำดับ)"),
             code_cell("import json\nfrom pathlib import Path\nimport pandas as pd\n\n" + LOADER),
-            code_cell(
-                "from dataclasses import asdict, dataclass\nfrom typing import Any\nimport logging\n\n"
-                "logger = logging.getLogger(__name__)\n\n" + CONSTANTS + "\n\n" + FEATURE_SOURCE
-            ),
+            code_cell(FEATURE_CONTRACT_CELL),
             md_cell(
                 """### ขั้นตอนที่ 1: โหลด Silver แล้วแยก Train/Test
 
@@ -1006,10 +1013,7 @@ print("Lab 3 verification passed")'''
             ),
             md_cell("### เตรียม loader + ฟังก์ชันฟีเจอร์"),
             code_cell("import json\nfrom pathlib import Path\nimport pandas as pd\n\n" + LOADER),
-            code_cell(
-                "from dataclasses import asdict, dataclass\nfrom typing import Any\nimport logging\n\n"
-                "logger = logging.getLogger(__name__)\n\n" + CONSTANTS + "\n\n" + FEATURE_SOURCE
-            ),
+            code_cell(FEATURE_CONTRACT_CELL),
             md_cell(
                 """### ขั้นตอนที่ 1: โหลด Silver สำหรับ AutoML
 
@@ -1171,10 +1175,7 @@ print("Lab 3 verification passed")'''
             ),
             md_cell("### เตรียม loader + ฟังก์ชันฟีเจอร์"),
             code_cell("import json\nfrom pathlib import Path\nimport pandas as pd\n\n" + LOADER),
-            code_cell(
-                "from dataclasses import asdict, dataclass\nfrom typing import Any\nimport logging\n\n"
-                "logger = logging.getLogger(__name__)\n\n" + CONSTANTS + "\n\n" + FEATURE_SOURCE
-            ),
+            code_cell(FEATURE_CONTRACT_CELL),
             md_cell(
                 """### ขั้นตอนที่ 1: โหลดชุดทำนาย + params ชุดฝึก
 
