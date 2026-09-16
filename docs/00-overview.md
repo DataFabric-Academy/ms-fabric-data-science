@@ -61,8 +61,8 @@ flowchart TD
 | Train and track with MLflow | M05 | Lab 3 | โมเดล Champion `freshmart-churn-model` บน Model Registry |
 | Generate batch predictions | M06 | Lab 4 | ตาราง `gold.freshmart_predictions` พร้อมส่งต่อ Power BI |
 
-*M07–M08 เป็นเนื้อหาขยายฉบับ Instructor Edition (Copilot, Semantic Link, และ Roadmap 30 วัน)*  
-*หลัง Lab 3 ผู้สอนอาจสาธิต AutoML แบบทางเลือก — ดู [09-automl.md](09-automl.md) และ [คู่มือ Demo](../labs/instructions/instructor-automl-demo.md) ไม่แทนที่โมเดล Champion ของ Lab 3*
+*M07–M08 เป็นเนื้อหาขยายฉบับ Instructor Edition (Copilot, Semantic Link, และ Roadmap 30 วัน) — รอบ 6 ชม. ย่อตาม [instructor-6h-runbook.md](instructor-6h-runbook.md)*  
+*หลัง Lab 3 ผู้สอนอาจสาธิต AutoML แบบทางเลือกในรอบ 12 ชม. เท่านั้น — ดู [09-automl.md](09-automl.md) ไม่แทนที่โมเดล Champion ของ Lab 3*
 
 
 ## สภาพแวดล้อมที่ต้องมี
@@ -76,9 +76,14 @@ flowchart TD
 
 ## ระเบียบวิธีเรียนรู้ (จากสไลด์)
 
+สไลด์ Instructor Edition ฉบับ 12 ชั่วโมงตั้งสัดส่วนไว้ดังนี้:
+
 - ประมาณ 70% หลักการและสถาปัตยกรรมที่นำไปตัดสินใจได้
 - ประมาณ 20% แล็บปฏิบัติ (Lab 0–4)
 - ประมาณ 10% สะท้อนโจทย์องค์กรของผู้เรียน
+
+รอบห้องเรียน **6 ชั่วโมง (lab รวมบรรยาย)** ใช้สัดส่วนนี้ไม่ได้ทั้งม้วน — แล็บ Lab 1–4 เป็นแกน บรรยายเหลือเท่าที่ต้องพูดก่อนลงมือ และย้าย Lab 0 ทั้งก้อนเป็นงานก่อนเข้าห้อง  
+กำหนดการนาทีต่อนาทีอยู่ที่ [instructor-6h-runbook.md](instructor-6h-runbook.md)
 
 ## แนวทางในห้องเรียน
 

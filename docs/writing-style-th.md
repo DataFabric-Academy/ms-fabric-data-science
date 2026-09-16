@@ -14,7 +14,8 @@
 3. **คงภาษาอังกฤษเฉพาะเมื่อจำเป็น**  
    - ชื่อผลิตภัณฑ์: Microsoft Fabric, Power BI, OneLake, MLflow  
    - ป้ายบนหน้าจอ: **Data**, **Data Wrangler**, **Apply**, **Add code to notebook**  
-   - ชื่อตาราง / ตัวแปร / ไฟล์: `bronze.transactions`, `feature_params.json`
+   - ชื่อตาราง / ตัวแปร / ไฟล์: `bronze.transactions`, `feature_params.json`  
+   - สิทธิ์การใช้ซอฟต์แวร์: **License** (เช่น MIT License) — ห้ามแปลว่าลายเซ็น หรือลิขสิทธิ์
 
 4. **อย่าสร้างตารางอภิธานศัพท์ย่อยซ้ำในแต่ละแล็บ**  
    - อธิบาย 1–2 ประโยคในบริบทนั้น แล้วลิงก์ไป [glossary.md](glossary.md)
@@ -45,6 +46,7 @@
 | โซนลงจอด | **พื้นที่รับไฟล์นำเข้า (Landing Zone)** | สื่อถึงพื้นที่จัดเก็บไฟล์ CSV ก่อนโหลดเข้าตาราง Delta |
 | สลับประสบการณ์ | **สลับโหมดการทำงาน (Experience Switcher)** | สื่อถึงปุ่มสลับมุมล่างซ้ายของ Fabric UI เช่น Data Science, Data Factory |
 | วัตถุดิบดิบ (ใน Medallion) | **ข้อมูลต้นฉบับ / Ingestion Layer** | สื่อถึงระดับสัญญาคุณภาพ (Quality Contract) ในระดับองค์กร |
+| ลายเซ็น / ลิขสิทธิ์ (เมื่อหมายถึง License) | **License** หรือ **สัญญาอนุญาตใช้ (MIT License)** | ลายเซ็น = signature (เช่น ลายเซ็นโมเดล) ลิขสิทธิ์ = copyright — ทั้งคู่ไม่ใช่ License |
 
 ## แม่แบบย่อหน้า “สิ่งที่ควรเห็น”
 

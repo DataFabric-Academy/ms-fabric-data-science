@@ -47,7 +47,7 @@ https://learn.microsoft.com/training/paths/implement-data-science-machine-learni
 
 | ไฟล์ | เนื้อหา |
 | --- | --- |
-| `DP-604-TH-12H-DataScience-Fabric.pptx` | Instructor Edition ภาษาไทย ~120 สไลด์ (M00–M08) |
+| `DP-604-TH-12H-DataScience-Fabric.pptx` | Instructor Edition ภาษาไทย ~120 สไลด์ (M00–M08) — ออกแบบมา 12 ชม. รอบสอน 6 ชม. ใช้ [กำหนดการผู้สอน](instructor-6h-runbook.md) เลือกใบก่อนลงมือ |
 | `DP-604T00-ENU-PowerPoint_01.pptx` | Courseware ENU หลัก |
 | `DP-604T00-ENU-PowerPoint_00-Introduction.pptx` | Introduction deck |
 | `DP-604T00-ENU-PowerPoint_02-Conclusion.pptx` | Conclusion deck |

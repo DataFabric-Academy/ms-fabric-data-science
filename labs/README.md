@@ -75,14 +75,16 @@ flowchart TD
 | **3** | [03-train-track-mlflow.md](instructions/03-train-track-mlflow.md) | `03-train-track-mlflow.ipynb` | Experiment เปรียบเทียบสองโมเดล และ Champion `freshmart-churn-model` |
 | **4** | [04-batch-predict.md](instructions/04-batch-predict.md) | `04-batch-predict.ipynb` | ตาราง Delta `gold.freshmart_predictions` สำหรับทีมการตลาด |
 
-## สำหรับผู้สอน (ทางเลือก หลัง Lab 3)
+## สำหรับผู้สอน
 
-สาธิต AutoML บน workspace ของผู้สอนเท่านั้น ผู้เรียนดู ไม่รันตามทั้งคลาส และห้ามทับ `freshmart-churn-model`
+รอบห้องเรียน **6 ชั่วโมง (lab รวมบรรยาย)** ใช้กำหนดการที่ [instructor-6h-runbook.md](../docs/instructor-6h-runbook.md) — ย้าย Lab 0 เป็นงานก่อนเข้าห้อง อย่าขยาย Lab 2 ให้ Wrangler เป็น pipeline โมเดล และตัด Demo AutoML ออกจากกำหนดการหลัก
+
+สาธิต AutoML ได้เฉพาะเมื่อเวลาบ่ายเหลือ และทำบน workspace ของผู้สอนเท่านั้น ผู้เรียนดู ไม่รันตามทั้งคลาส และห้ามทับ `freshmart-churn-model`
 
 | เอกสาร | ใช้เมื่อ |
 | :--- | :--- |
 | ทฤษฎี [09-automl.md](../docs/09-automl.md) | อธิบายว่า AutoML ทำอะไรให้ และอะไรยังเป็นหน้าที่คน |
-| คู่มือ [instructor-automl-demo.md](instructions/instructor-automl-demo.md) | เดินตัวช่วย Quick Prototype 8–12 นาที ก่อนเข้า Lab 4 |
+| คู่มือ [instructor-automl-demo.md](instructions/instructor-automl-demo.md) | รอบ 6 ชม. ใช้ได้เฉพาะช่วงกันพลาดบ่าย และต้องรันล่วงหน้า — อย่าเดินตัวช่วยทั้งคลาส |
 
 
 ## ข้อมูลที่ใช้

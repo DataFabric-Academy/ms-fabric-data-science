@@ -8,7 +8,8 @@
 หลังอ่านบทนี้ คุณจะแยกได้ว่า AutoML ทำอะไรให้ อะไรยังเป็นหน้าที่คน และเมื่อไหร่ไม่ควรใช้ผลจาก AutoML เป็นโมเดลที่เลือกใช้ของ FreshMart  
 ศัพท์ที่เกี่ยวข้อง: [AutoML](glossary.md#automl-automated-machine-learning) · [FLAML](glossary.md#flaml) · [โมเดลเส้นฐาน](glossary.md#โมเดลเส้นฐาน-baseline) · [โมเดลที่เลือกใช้](glossary.md#โมเดลที่เลือกใช้-champion) · [AUC](glossary.md#auc-area-under-the-roc-curve) · [Capacity](glossary.md#capacity)
 
-สาธิตในห้อง: [คู่มือ Demo ผู้สอน](../labs/instructions/instructor-automl-demo.md)
+สาธิตในห้อง: [คู่มือ Demo ผู้สอน](../labs/instructions/instructor-automl-demo.md)  
+รอบ **6 ชั่วโมง** ตัด Demo นี้ออกจากกำหนดการหลัก — ดู [instructor-6h-runbook.md](instructor-6h-runbook.md)
 
 ## AutoML คืออะไร และไม่ใช่อะไร
 

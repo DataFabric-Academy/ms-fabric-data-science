@@ -25,7 +25,8 @@
 | 6 | [สร้างคำทำนายแบบชุดด้วย PREDICT](06-batch-predict.md) | M06 | Generate batch predictions | Lab 4 |
 | 7 | [Copilot, Semantic Link, Responsible AI](07-modern-ai.md) | M07 | (ขยายจาก Learn + Fabric docs) | — |
 | 8 | [สรุปและแผน 30 วัน](08-wrap-up-roadmap.md) | M08 | — | — |
-| 9 | [AutoML บน Fabric (ทางเลือก)](09-automl.md) | — | (ขยายจาก Fabric docs) | Demo ผู้สอนหลัง Lab 3 |
+| 9 | [AutoML บน Fabric (ทางเลือก)](09-automl.md) | — | (ขยายจาก Fabric docs) | Demo ผู้สอนหลัง Lab 3 — ตัดในรอบ 6 ชม. |
+| — | [กำหนดการห้องเรียน 6 ชั่วโมง](instructor-6h-runbook.md) | — | ผู้สอน | Lab 0 เป็นงานก่อนเข้าห้อง |
 | — | [แหล่งอ้างอิง](resources.md) | — | ครบชุด | — |
 
 ## กลุ่มเป้าหมาย
