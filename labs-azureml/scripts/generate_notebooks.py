@@ -655,9 +655,12 @@ Lab 4 ทำนายชุดใหม่ 200 คน — **ห้ามคำ�
 ตัวแปรสำคัญ: **`df`**"""
             ),
             code_cell(
-                """df = load_table_or_csv(BRONZE_TRANSACTIONS, "freshmart_transactions.csv")
+                """df = load_table_or_csv(
+    BRONZE_TRANSACTIONS,
+    "freshmart_transactions.csv",
+)
 df = df.sample(n=500, random_state=1).reset_index(drop=True)
-print("Sample for prep practice:", df.shape)
+print("Sample for Data Wrangler:", df.shape)
 df.head(4)"""
             ),
             md_cell(

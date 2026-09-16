@@ -500,7 +500,10 @@ Lab 4 ทำนายชุดใหม่ 200 คน — **ห้ามคำ�
 ตัวแปรสำคัญ: **`df`** ต้องมีก่อนเปิด Data Wrangler"""
             ),
             code_cell(
-                """df = load_table_or_csv("bronze.transactions", "freshmart_transactions.csv")
+                """df = load_table_or_csv(
+    "bronze.transactions",
+    "freshmart_transactions.csv",
+)
 df = df.sample(n=500, random_state=1).reset_index(drop=True)
 print("Sample for Data Wrangler:", df.shape)
 df.head(4)"""
